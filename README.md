@@ -22,7 +22,7 @@ This repository contains the **front-end** portion of the MERN stack project —
 
 ### 🔗 Live Demo & Links
 - **Frontend Deployment:** [Frontend Deployment Link]
-- **Backend Repository:** [Backend Repo Link](https://github.com/yourusername/helphub-backend)
+- **Backend Repository:** [Backend Repo Link](https://github.com/RuqayaHusain/VolunHub-backend)
 - **Planning Docs (Trello / ERD / Wireframes):** [Planning Materials Link](https://trello.com/b/stIO635N/volunhub)
 
 ---
