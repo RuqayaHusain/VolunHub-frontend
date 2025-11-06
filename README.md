@@ -122,7 +122,7 @@ This repository contains the **front-end** portion of the MERN stack project —
 
 - [Ruqaya Husain](https://github.com/RuqayaHusain)
 - [Manar Mohammed](https://github.com/manar-251)  
-- [Ali Alqallaf](https://github.com/algallaf)
+- [Ali Algallaf](https://github.com/algallaf)
 
 ---
 
