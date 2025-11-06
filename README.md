@@ -1,4 +1,4 @@
-# 🌍 HelpHub (Front-End)
+# 🌍 VolunHub (Front-End)
 
 *A platform connecting volunteers with organizations offering opportunities to make a difference.*
 
@@ -6,10 +6,10 @@
 
 ## 🧠 Overview
 
-**HelpHub** is a web platform built with **React** that bridges volunteers and organizations offering community service opportunities.  
+**VolunHub** is a web platform built with **React** that bridges volunteers and organizations offering community service opportunities.  
 Volunteers can explore and apply for events, track their participation, and share feedback — while organizations can post and manage events seamlessly.
 
-This repository contains the **front-end** portion of the MERN stack project — built with **React**, **React Router**, and connected to the **HelpHub API**.
+This repository contains the **front-end** portion of the MERN stack project — built with **React**, **React Router**, and connected to the **VolunHub API**.
 
 ---
 
@@ -126,4 +126,4 @@ This repository contains the **front-end** portion of the MERN stack project —
 
 ---
 
-© 2025 HelpHub. All rights reserved.
+© 2025 VolunHub. All rights reserved.
