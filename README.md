@@ -22,8 +22,8 @@ This repository contains the **front-end** portion of the MERN stack project —
 
 ### 🔗 Live Demo & Links
 - **Frontend Deployment:** [Frontend Deployment Link]
-- **Backend Repository:** [https://github.com/yourusername/helphub-backend](Backend Repo Link)
-- **Planning Docs (Trello / ERD / Wireframes):** [https://trello.com/b/stIO635N/volunhub](Planning Materials Link)
+- **Backend Repository:** [Backend Repo Link](https://github.com/yourusername/helphub-backend)
+- **Planning Docs (Trello / ERD / Wireframes):** [Planning Materials Link](https://trello.com/b/stIO635N/volunhub)
 
 ---
 
@@ -120,9 +120,9 @@ This repository contains the **front-end** portion of the MERN stack project —
 
 ## 👥 Team Members
 
-- [Ruqaya Husain]  
-- [Manar Mohammed]  
-- [Ali Alqallaf]  
+- [Ruqaya Husain](https://github.com/RuqayaHusain)
+- [Manar Mohammed](https://github.com/manar-251)  
+- [Ali Alqallaf](https://github.com/algallaf)
 
 ---
 
