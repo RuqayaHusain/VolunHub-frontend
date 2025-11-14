@@ -10,6 +10,7 @@ import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import { useContext } from 'react';
 import { UserContext } from './contexts/UserContext';
+import EventList from './components/EventList/EventList';
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -27,6 +28,7 @@ const App = () => {
             <Route path='/favs' element={<h1>Favs</h1>}/>
             <Route path='/profile' element={<h1>{user.username}</h1>}/>
             <Route path='/orders' element={<h1>ORDERS</h1>}/>
+            <Route path='/events' element={<EventList />} />
           </>
             :
             <Route path='/' element={<Landing/>}/>
