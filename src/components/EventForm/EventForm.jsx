@@ -53,6 +53,7 @@ const EventForm = (props) => {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="title">Title</label>
                 <input
+                    required
                     type="text"
                     name="title"
                     id="title"
@@ -62,6 +63,7 @@ const EventForm = (props) => {
 
                 <label htmlFor="description">Description</label>
                 <textarea
+                    required
                     name="description"
                     id="description"
                     cols="10"
@@ -72,6 +74,7 @@ const EventForm = (props) => {
 
                 <label htmlFor="category">Category</label>
                 <select
+                    required
                     name="category"
                     id="category"
                     value={formData.category}
@@ -97,6 +100,7 @@ const EventForm = (props) => {
 
                 <label htmlFor="location">Location</label>
                 <input
+                    required
                     type="text"
                     name="location"
                     id="location"
@@ -106,6 +110,7 @@ const EventForm = (props) => {
 
                 <label htmlFor="date">Date</label>
                 <input
+                    required
                     type="date"
                     name="date"
                     id="date"

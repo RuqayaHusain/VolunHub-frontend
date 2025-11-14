@@ -47,6 +47,9 @@ const EventList = () => {
     return (
         <main>
             <h1>Events</h1>
+            <button onClick={() => navigate('/events/new')}>
+                Create Event
+            </button>
             {validationMessage && <p>{validationMessage}</p>}
             <section>
                 <h2>Filter</h2>
