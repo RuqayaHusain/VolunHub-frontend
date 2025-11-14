@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import * as eventService from '../../services/eventService';
 import EventFilter from "../EventFilter/EventFilter";
+import EventCard from "../EventCard/EventCard";
 
 
 const EventList = () => {
@@ -43,13 +44,7 @@ const EventList = () => {
 
             <section>
                 {events.map((event) => (
-                    <div key={event._id}>
-                        <h3>{event.title}</h3>
-                        <p>Category: {event.category}</p>
-                        <p>Location: {event.location}</p>
-                        <p>Date: {new Date(event.date).toLocaleDateString()}</p>
-                        <button onClick={() => navigate(`/events/${event._id}`)}>View Details</button>
-                    </div>
+                    <EventCard key={event._id} event={event} />
                 ))}
             </section>
 
