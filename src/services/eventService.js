@@ -51,6 +51,6 @@ const createEvent = async (eventFormData) => {
 
 export {
     createEvent,
-    ShowAllEvents,
+    showAllEvents,
     showEvent,
 }
