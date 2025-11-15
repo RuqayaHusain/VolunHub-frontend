@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import * as eventService from '../../services/eventService';
 import EventFilter from "../EventFilter/EventFilter";
 import EventCard from "../EventCard/EventCard";
+import { UserContext } from "../../contexts/UserContext";
 
 
 const EventList = () => {
+    const { user } = useContext(UserContext);
     const [events, setEvents] = useState([]);
     const [filter, setFilter] = useState({
         title: '',
@@ -17,6 +19,8 @@ const EventList = () => {
     const [validationMessage, setValidationMessage] = useState("");
 
     const navigate = useNavigate();
+
+    const isOrganization = user.role === 'organization';
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -31,9 +35,11 @@ const EventList = () => {
     return (
         <main>
             <h1>Events</h1>
-            <button onClick={() => navigate('/events/new')}>
-                Create Event
-            </button>
+            {isOrganization && (
+                <button onClick={() => navigate('/events/new')}>
+                    Create Event
+                </button>
+            )}
 
             <EventFilter
                 filter={filter}
