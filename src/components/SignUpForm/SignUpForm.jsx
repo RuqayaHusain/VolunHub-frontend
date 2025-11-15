@@ -21,7 +21,7 @@ const SignUpForm = () => {
     username: '',
     password: '',
     passwordConf: '',
-    rele:'volunteer',
+    role:'volunteer',
     name:'',
     bio:'',
     profilePicture:''
@@ -157,7 +157,7 @@ const SignUpForm = () => {
           />
         </div>
 
-        
+
         <div>
           <button disabled={isFormInvalid()}>Sign Up</button>
           <button onClick={() => navigate('/')}>Cancel</button>
