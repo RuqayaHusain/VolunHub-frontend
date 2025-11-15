@@ -4,12 +4,21 @@ const EventFilter = (props) => {
     const handleChange = (evt) => {
         const { name, value } = evt.target;
 
-        const newFilter = { ...props.filter, [name]: value };
+        // removes symbols that might effect the filter query
+        const newValue = (name === 'title' || name === 'location') ? value.replace(/[^\w\s-]/g, '') : value;
+
+        if ((name === 'title' || name === 'location') && newValue !== value) {
+            props.setValidationMessage('Filter only accepts letters, numbers, spaces, and hyphens');
+            props.setFilter({ ...props.filter, [name]: '' }); // reset the value
+            return;
+        }
+
+        const newFilter = { ...props.filter, [name]: newValue };
 
         if (newFilter.startDate && newFilter.endDate) {
             if (newFilter.startDate > newFilter.endDate) {
-                newFilter.startDate = "";
-                newFilter.endDate = "";
+                newFilter.startDate = '';
+                newFilter.endDate = '';
                 props.setValidationMessage('End date must be after start date');
             } else {
                 props.setValidationMessage('');
@@ -19,6 +28,17 @@ const EventFilter = (props) => {
         }
         props.setFilter(newFilter);
 
+    };
+
+    const handleReset = () => {
+        props.setFilter({
+            title: '',
+            location: '',
+            startDate: '',
+            endDate: '',
+            category: '',
+        });
+        props.setValidationMessage('');
     };
 
     return (
@@ -80,6 +100,13 @@ const EventFilter = (props) => {
                 <option value="Food Distribution">Food Distribution</option>
                 <option value="Other">Other</option>
             </select>
+
+            <button
+                type="submit"
+                onClick={handleReset}
+            >
+                Reset
+            </button>
 
         </section>
     );
