@@ -47,10 +47,26 @@ const createEvent = async (eventFormData) => {
     }
 };
 
+const applyForEvent = async (eventId) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${eventId}/apply`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+
+        return res.json();
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 
 
 export {
     createEvent,
     showAllEvents,
     showEvent,
+    applyForEvent,
 }
