@@ -21,10 +21,21 @@ const EventDetail = () => {
         if (eventId) fetchEvent();
     }, [eventId]);
 
+    if (!event) return <h3>Loading ...</h3>
+
+    const isExpired = new Date(event.date) < new Date();
+    const isFull = event.maxVolunteers === 0;
+    
     const handleApply = async () => {
-        setIsApplying(true);
         setValidationMessage('');
+
+        if (isExpired) return setValidationMessage('Event already ended');
+        if (isFull) return setValidationMessage('Event is full');
+
+        setIsApplying(true);
+
         const res = await eventService.applyForEvent(eventId);
+
         if (res.err) {
             setValidationMessage(res.err);
         } else {
@@ -33,7 +44,6 @@ const EventDetail = () => {
         setIsApplying(false);
     };
 
-    if (!event) return <h3>Loading ...</h3>
 
     return (
         <main>
@@ -48,9 +58,13 @@ const EventDetail = () => {
 
                 <button
                     onClick={handleApply}
-                    disabled={isApplying}
+                    disabled={isApplying || isExpired || isFull}
                 >
-                    {isApplying ? 'Applying...' : 'Apply to Event'}
+                    {
+                        isExpired ? 'Event Expired' :
+                            (isFull ? 'Applications Closed' :
+                                (isApplying ? 'Applying...' : 'Apply to Event'))
+                    }
 
                 </button>
 
