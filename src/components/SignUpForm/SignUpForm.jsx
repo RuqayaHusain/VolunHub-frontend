@@ -21,10 +21,14 @@ const SignUpForm = () => {
     username: '',
     password: '',
     passwordConf: '',
+    rele:'volunteer',
+    name:'',
+    bio:'',
+    profilePicture:''
   });
 
 
-  const { username, password, passwordConf } = formData;
+  const { username, password, passwordConf, role, name, bio, profilePicture } = formData;
 
   const handleChange = (evt) => {
     setMessage('');
@@ -56,16 +60,50 @@ const SignUpForm = () => {
       <p>{message}</p>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor='username'>Username:</label>
+          <label htmlFor='role'>I am:</label>
+          <select
+            id='role'
+            name='role'
+            value={role}
+            onChange={handleChange}
+            required
+          >
+          <option value='volunteer'>volunteer</option>
+          <option value='organization'>organization</option>
+          </select>
+        </div>
+
+
+         <div>
+          <label htmlFor='name'>
+            {role === 'volunteer' ? 'Full Name:' : 'Organization Name:'}
+          </label>
           <input
             type='text'
             id='name'
-            value={username}
-            name='username'
+            value={name}
+            name='name'
             onChange={handleChange}
+            placeholder={role === 'volunteer' ? 'Ahmed Ali' : 'Green Earth Initiative'}
             required
           />
         </div>
+        
+        
+        <div>
+          <label htmlFor='username'>Username:</label>
+          <input
+            type='text'
+            id='username'
+            value={username}
+            name='username'
+            onChange={handleChange}
+            placeholder='Choose a unique username'
+            required
+          />
+        </div>
+
+
         <div>
           <label htmlFor='password'>Password:</label>
           <input
@@ -88,6 +126,38 @@ const SignUpForm = () => {
             required
           />
         </div>
+
+          <div>
+          <label htmlFor='bio'>
+            {role === 'volunteer' ? 'About You (Optional):' : 'About Organization (Optional):'}
+          </label>
+          <textarea
+            id='bio'
+            name='bio'
+            value={bio}
+            onChange={handleChange}
+            rows='4'
+            placeholder={
+              role === 'volunteer' 
+                ? 'Tell us about yourself...' 
+                : 'Describe your organization...'
+            }
+          />
+        </div>
+
+         <div>
+          <label htmlFor='profilePicture'>Profile Picture URL (Optional):</label>
+          <input
+            type='url'
+            id='profilePicture'
+            name='profilePicture'
+            value={profilePicture}
+            onChange={handleChange}
+            placeholder='https://example.com/image.jpg'
+          />
+        </div>
+
+        
         <div>
           <button disabled={isFormInvalid()}>Sign Up</button>
           <button onClick={() => navigate('/')}>Cancel</button>
