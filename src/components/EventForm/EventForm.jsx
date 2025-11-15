@@ -13,6 +13,7 @@ const EventForm = (props) => {
         duration: 0,
         maxVolunteers: 0,
     });
+    const [validationMessage, setValidationMessage] = useState({});
 
     useEffect(() => {
         const fetchEvent = async () => {
@@ -39,8 +40,22 @@ const EventForm = (props) => {
         setFormData({ ...formData, [evt.target.name]: evt.target.value });
     };
 
+    const validateForm = () => {
+        const newValidation = {};
+        const currentDate = new Date().toISOString().split('T')[0];
+
+        if (formData.duration <= 0) newValidation.duration = 'Duration must be greater than 0';
+        if (formData.maxVolunteers <= 0) newValidation.maxVolunteers = 'Max volunteers must be greater than 0';
+        if (formData.date <= currentDate) newValidation.date = 'Date must be greater than today';
+
+        setValidationMessage(newValidation);
+        return Object.keys(newValidation).length === 0;
+    };
+
     const handleSubmit = (evt) => {
         evt.preventDefault();
+        if (!validateForm()) return;
+
         if (eventId) {
             props.handleUpdateEvent(eventId, formData);
         } else {
@@ -117,24 +132,29 @@ const EventForm = (props) => {
                     value={formData.date}
                     onChange={handleChange}
                 />
+                {validationMessage.date && <p>{validationMessage.date}</p>}
 
                 <label htmlFor="duration">Duration (hours)</label>
                 <input
+                    required
                     type="number"
                     name="duration"
                     id="duration"
                     value={formData.duration}
                     onChange={handleChange}
                 />
+                {validationMessage.duration && <p>{validationMessage.duration}</p>}
 
                 <label htmlFor="maxVolunteers">Max Volunteers</label>
                 <input
+                    required
                     type="number"
                     name="maxVolunteers"
                     id="maxVolunteers"
                     value={formData.maxVolunteers}
                     onChange={handleChange}
                 />
+                {validationMessage.maxVolunteers && <p>{validationMessage.maxVolunteers}</p>}
 
                 <button type="submit">{eventId ? 'Update Event' : 'Create Event'}</button>
             </form>
