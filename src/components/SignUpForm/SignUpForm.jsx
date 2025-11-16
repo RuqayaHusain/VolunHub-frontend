@@ -19,19 +19,31 @@ const SignUpForm = () => {
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     username: '',
+    name: '',
+    role: '',
+    bio: '',
+    profilePicture: '',
     password: '',
     passwordConf: '',
   });
 
 
-  const { username, password, passwordConf } = formData;
+  const {
+    username,
+    name,
+    role,
+    bio,
+    profilePicture,
+    password,
+    passwordConf
+  } = formData;
 
   const handleChange = (evt) => {
     setMessage('');
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
- const handleSubmit = async (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
       const newUser = await signUp(formData);
@@ -47,7 +59,11 @@ const SignUpForm = () => {
   };
 
   const isFormInvalid = () => {
-    return !(username && password && password === passwordConf);
+    return !(username
+      && name
+      && role
+      && password
+      && password === passwordConf);
   };
 
   return (
@@ -59,11 +75,55 @@ const SignUpForm = () => {
           <label htmlFor='username'>Username:</label>
           <input
             type='text'
-            id='name'
+            id='username'
             value={username}
             name='username'
             onChange={handleChange}
             required
+          />
+        </div>
+        <div>
+          <label htmlFor='name'>Full Name:</label>
+          <input
+            type='text'
+            id='name'
+            value={name}
+            name='name'
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor='role'>Role:</label>
+          <select
+            id='role'
+            name='role'
+            value={role}
+            onChange={handleChange}
+            required
+          >
+            <option value=''></option>
+            <option value='volunteer'>Volunteer</option>
+            <option value='organization'>Organization</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor='bio'>Bio:</label>
+          <textarea
+            id='bio'
+            name='bio'
+            value={bio}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <div>
+          <label htmlFor='profilePicture'>Profile Picture (URL):</label>
+          <input
+            type='text'
+            id='profilePicture'
+            value={profilePicture}
+            name='profilePicture'
+            onChange={handleChange}
           />
         </div>
         <div>
