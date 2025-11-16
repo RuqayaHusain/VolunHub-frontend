@@ -1,37 +1,29 @@
 
 import React from "react";
-import { useNavigate } from "react-router";
 import * as dashboardService from "../../services/dashboardService.js";
 
-const OrganizationDashboardCard = ({ application, onDelete, onStatusUpdate }) => {
-  const navigate = useNavigate();
+const OrganizationDashboardCard = ({ application, onStatusUpdate }) => {
 
     const volunteer = application.volunteer;
 
  
 
   const handleApprove = async () => {
-    try {
-      await dashboardService.updateApplicationStatus(application._id, "approved");
-      onStatusUpdate(application._id, "approved"); 
-    } catch (error) {
-    }
+    await dashboardService.updateApplicationStatus(application._id, "approved");
+    onStatusUpdate(application._id, "approved"); 
+    
   };
 
   const handleReject = async () => {
-    try {
-      await dashboardService.updateApplicationStatus(application._id, "rejected");
-      onStatusUpdate(application._id, "rejected"); 
-    } catch (error) {
-    }
+    await dashboardService.updateApplicationStatus(application._id, "rejected");
+    onStatusUpdate(application._id, "rejected"); 
+    
   };
 
    const handlecomplete = async () => {
-    try {
-      await dashboardService.updateApplicationStatus(application._id, "completed");
-      onStatusUpdate(application._id, "completed"); 
-    } catch (error) {
-    }
+     await dashboardService.updateApplicationStatus(application._id, "completed");
+     onStatusUpdate(application._id, "completed"); 
+    
   };
   return (
     <div key={application._id}>

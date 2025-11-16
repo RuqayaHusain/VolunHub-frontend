@@ -46,11 +46,8 @@ const EventDetail = () => {
     };
 
  const handleDelete = async () => {
-    try {
-        await eventService.deleteEvent(eventId);
-        navigate('/events');
-    } catch (err) {
-    }
+     await eventService.deleteEvent(eventId);
+     navigate('/events');
 };
 
 

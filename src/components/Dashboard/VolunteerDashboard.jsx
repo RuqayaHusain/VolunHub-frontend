@@ -31,11 +31,11 @@ const VolunteerDashboard = () => {
       <h1>My Applications</h1>
 
       {uniqueEvents.length === 0 ? (
-        <p>You haven’t applied to any events yet.</p>
+        <p>You haven't applied to any events yet.</p>
       ) : (
         <div>
           {uniqueEvents.map((app) => (
-            <DashboardCard key={app._id} applications={app} />
+            <DashboardCard key={app._id} application={app} />
           ))}
         </div>
       )}
