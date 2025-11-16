@@ -4,26 +4,26 @@ import * as dashboardService from "../../services/dashboardService.js";
 
 const OrganizationDashboardCard = ({ application, onStatusUpdate }) => {
 
-    const volunteer = application.volunteer;
+  const volunteer = application.volunteer;
 
- 
+
 
   const handleApprove = async () => {
     await dashboardService.updateApplicationStatus(application._id, "approved");
-    onStatusUpdate(application._id, "approved"); 
-    
+    onStatusUpdate(application._id, "approved");
+
   };
 
   const handleReject = async () => {
     await dashboardService.updateApplicationStatus(application._id, "rejected");
-    onStatusUpdate(application._id, "rejected"); 
-    
+    onStatusUpdate(application._id, "rejected");
+
   };
 
-   const handlecomplete = async () => {
-     await dashboardService.updateApplicationStatus(application._id, "completed");
-     onStatusUpdate(application._id, "completed"); 
-    
+  const handlecomplete = async () => {
+    await dashboardService.updateApplicationStatus(application._id, "completed");
+    onStatusUpdate(application._id, "completed");
+
   };
   return (
     <div key={application._id}>
@@ -35,8 +35,7 @@ const OrganizationDashboardCard = ({ application, onStatusUpdate }) => {
 
       <h2>Volunteer Details</h2>
       <p>Name: {volunteer.name}</p>
-      <p>Email: {volunteer.email || "N/A"}</p>
-     <p>Total Volunteering Hours: {volunteer.totalHours}</p>
+      <p>Total Volunteering Hours: {volunteer.totalHours}</p>
       <p>Status: {application.status}</p>
 
 
@@ -49,7 +48,7 @@ const OrganizationDashboardCard = ({ application, onStatusUpdate }) => {
       <button onClick={handlecomplete} disabled={application.status === "completed"}>
         complete
       </button>
- 
+
 
     </div>
   );

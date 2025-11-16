@@ -1,14 +1,23 @@
-
 const DashboardCard = ({ application }) => {
-  if (!application || !application.event) return null;
+  if (!application) return null;
+
+  const event = application.event;
 
   return (
-    <div key={application._id}>
-      <h3>{application.event.title}</h3>
-      <p>Date: {new Date(application.event.date).toLocaleDateString()}</p>
-      <p>Location: {application.event.location}</p>
-      <p>Volunteering Hours: {application.hours}</p>
-      <p>Status: {application.status}</p>
+    <div key={application._id} >
+      <h3>{event ? event.title : "Event not available"}</h3>
+
+      {event ? (
+        <>
+          <p>Date: {new Date(event.date).toLocaleDateString()}</p>
+          <p>Location: {event.location}</p>
+        </>
+      ) : (
+        <p>Event details not available</p>
+      )}
+
+      <p>Volunteering Hours: {application.hours ?? "N/A"}</p>
+      <p>Status: {application.status ?? "N/A"}</p>
     </div>
   );
 };

@@ -14,6 +14,7 @@ import EventDetail from './components/EventDetail/EventDetail';
 import OrganizationDashboard from "./components/Dashboard/OrganizationDashboard.jsx";
 
 
+
 const App = () => {
   const [events, setEvents] = useState([]);
   const { user } = useContext(UserContext);
