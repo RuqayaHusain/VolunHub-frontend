@@ -1,0 +1,177 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import * as eventService from '../../services/eventService';
+import styles from './EventForm.module.css';
+
+const EventForm = (props) => {
+    const { eventId } = useParams();
+    const [formData, setFormData] = useState({
+        title: '',
+        description: '',
+        category: 'Community Service',
+        location: '',
+        date: '',
+        duration: 0,
+        maxVolunteers: 0,
+    });
+    const [validationMessage, setValidationMessage] = useState({});
+
+    useEffect(() => {
+        const fetchEvent = async () => {
+            const eventData = await eventService.showEvent(eventId);
+            setFormData({
+                ...eventData,
+                date: eventData.date ? new Date(eventData.date).toISOString().split('T')[0] : '',
+            });
+        };
+        if (eventId) fetchEvent();
+
+        return () => setFormData({
+            title: '',
+            description: '',
+            category: 'Community Service',
+            location: '',
+            date: '',
+            duration: 0,
+            maxVolunteers: 0,
+        });
+    }, [eventId]);
+
+    const handleChange = (evt) => {
+        setFormData({ ...formData, [evt.target.name]: evt.target.value });
+    };
+
+    const validateForm = () => {
+        const newValidation = {};
+        const currentDate = new Date().toISOString().split('T')[0];
+
+        if (formData.duration <= 0) newValidation.duration = 'Duration must be greater than 0';
+        if (formData.maxVolunteers <= 0) newValidation.maxVolunteers = 'Max volunteers must be greater than 0';
+        if (formData.date <= currentDate) newValidation.date = 'Date must be greater than today';
+
+        setValidationMessage(newValidation);
+        return Object.keys(newValidation).length === 0;
+    };
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        if (!validateForm()) return;
+
+        if (eventId) {
+            props.handleUpdateEvent(eventId, formData);
+        } else {
+            props.handleAddEvent(formData);
+        }
+    };
+
+    return (
+        <main className={styles.container}>
+            <div className={styles.card}>
+                <h1 className={styles.title}>{eventId ? 'Update Event' : 'Create Event'}</h1>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="title">Title</label>
+                        <input
+                            required
+                            type="text"
+                            name="title"
+                            id="title"
+                            value={formData.title}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="description">Description</label>
+                        <textarea
+                            required
+                            name="description"
+                            id="description"
+                            cols="10"
+                            rows="10"
+                            value={formData.description}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="category">Category</label>
+                        <select
+                            required
+                            name="category"
+                            id="category"
+                            value={formData.category}
+                            onChange={handleChange}>
+
+                            <option value="Community Service">Community Service</option>
+                            <option value="Education">Education</option>
+                            <option value="Environmental">Environmental</option>
+                            <option value="Health & Wellness">Health & Wellness</option>
+                            <option value="Animal Care">Animal Care</option>
+                            <option value="Arts & Culture">Arts & Culture</option>
+                            <option value="Sports & Recreation">Sports & Recreation</option>
+                            <option value="Human Rights">Human Rights</option>
+                            <option value="Disaster Relief">Disaster Relief</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Fundraising">Fundraising</option>
+                            <option value="Elderly Support">Elderly Support</option>
+                            <option value="Youth Empowerment">Youth Empowerment</option>
+                            <option value="Food Distribution">Food Distribution</option>
+                            <option value="Other">Other</option>
+
+                        </select>
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="location">Location</label>
+                        <input
+                            required
+                            type="text"
+                            name="location"
+                            id="location"
+                            value={formData.location}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="date">Date</label>
+                        <input
+                            required
+                            type="date"
+                            name="date"
+                            id="date"
+                            value={formData.date}
+                            onChange={handleChange}
+                        />
+                        {validationMessage.date && <p className={styles.error}>{validationMessage.date}</p>}
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="duration">Duration (hours)</label>
+                        <input
+                            required
+                            type="number"
+                            name="duration"
+                            id="duration"
+                            value={formData.duration}
+                            onChange={handleChange}
+                        />
+                        {validationMessage.duration && <p className={styles.error}>{validationMessage.duration}</p>}
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="maxVolunteers">Max Volunteers</label>
+                        <input
+                            required
+                            type="number"
+                            name="maxVolunteers"
+                            id="maxVolunteers"
+                            value={formData.maxVolunteers}
+                            onChange={handleChange}
+                        />
+                        {validationMessage.maxVolunteers && <p className={styles.error}>{validationMessage.maxVolunteers}</p>}
+                    </div>
+                    <button type="submit" className={styles.submitBtn}>{eventId ? 'Update Event' : 'Create Event'}</button>
+                </form>
+            </div>
+        </main>
+    );
+
+};
+
+export default EventForm;

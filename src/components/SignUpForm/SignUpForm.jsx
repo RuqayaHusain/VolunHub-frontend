@@ -1,6 +1,7 @@
 // Import the useContext hook
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
+import styles from './SignUpForm.module.css';
 
 import { signUp } from '../../services/authService';
 
@@ -19,19 +20,31 @@ const SignUpForm = () => {
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     username: '',
+    name: '',
+    role: '',
+    bio: '',
+    profilePicture: '',
     password: '',
     passwordConf: '',
   });
 
 
-  const { username, password, passwordConf } = formData;
+  const {
+    username,
+    name,
+    role,
+    bio,
+    profilePicture,
+    password,
+    passwordConf
+  } = formData;
 
   const handleChange = (evt) => {
     setMessage('');
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
- const handleSubmit = async (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
       const newUser = await signUp(formData);
@@ -47,26 +60,75 @@ const SignUpForm = () => {
   };
 
   const isFormInvalid = () => {
-    return !(username && password && password === passwordConf);
+    return !(username
+      && name
+      && role
+      && password
+      && password === passwordConf);
   };
 
   return (
-    <main>
-      <h1>Sign Up</h1>
-      <p>{message}</p>
-      <form onSubmit={handleSubmit}>
-        <div>
+    <main className={styles.container}>
+      <div className={styles.card}>
+      <h1 className={styles.title}>Sign Up</h1>
+      <p className={styles.error}>{message}</p>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.inputGroup}>
           <label htmlFor='username'>Username:</label>
           <input
             type='text'
-            id='name'
+            id='username'
             value={username}
             name='username'
             onChange={handleChange}
             required
           />
         </div>
-        <div>
+        <div className={styles.inputGroup}>
+          <label htmlFor='name'>Full Name:</label>
+          <input
+            type='text'
+            id='name'
+            value={name}
+            name='name'
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className={styles.inputGroup}>
+          <label htmlFor='role'>Role:</label>
+          <select
+            id='role'
+            name='role'
+            value={role}
+            onChange={handleChange}
+            required
+          >
+            <option value=''></option>
+            <option value='volunteer'>Volunteer</option>
+            <option value='organization'>Organization</option>
+          </select>
+        </div>
+        <div className={styles.inputGroup}>
+          <label htmlFor='bio'>Bio:</label>
+          <textarea
+            id='bio'
+            name='bio'
+            value={bio}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <div className={styles.inputGroup}>
+          <label htmlFor='profilePicture'>Profile Picture (URL):</label>
+          <input
+            type='text'
+            id='profilePicture'
+            value={profilePicture}
+            name='profilePicture'
+            onChange={handleChange}
+          />
+        </div>
+        <div className={styles.inputGroup}>
           <label htmlFor='password'>Password:</label>
           <input
             type='password'
@@ -77,7 +139,7 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
+        <div className={styles.inputGroup}>
           <label htmlFor='confirm'>Confirm Password:</label>
           <input
             type='password'
@@ -88,11 +150,12 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
-          <button disabled={isFormInvalid()}>Sign Up</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+        <div className={styles.actions}>
+          <button disabled={isFormInvalid()} className={styles.submitBtn}>Sign Up</button>
+          <button onClick={() => navigate('/')} className={styles.cancelBtn}>Cancel</button>
         </div>
       </form>
+      </div>
     </main>
   );
 };

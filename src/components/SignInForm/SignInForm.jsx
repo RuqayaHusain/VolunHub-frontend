@@ -2,6 +2,7 @@
 
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
+import styles from './SignInForm.module.css';
 
 import { signIn } from '../../services/authService';
 
@@ -36,39 +37,41 @@ const SignInForm = () => {
   };
 
   return (
-    <main>
-      <h1>Sign In</h1>
-      <p>{message}</p>
-      <form autoComplete='off' onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='email'>Username:</label>
-          <input
-            type='text'
-            autoComplete='off'
-            id='username'
-            value={formData.username}
-            name='username'
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='password'>Password:</label>
-          <input
-            type='password'
-            autoComplete='off'
-            id='password'
-            value={formData.password}
-            name='password'
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <button>Sign In</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
-        </div>
-      </form>
+    <main className={styles.container}>
+      <div className={styles.card}>
+        <h1 className={styles.title}>Sign In</h1>
+        <p className={styles.error}>{message}</p>
+        <form autoComplete='off' onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.inputGroup}>
+            <label htmlFor='username'>Username:</label>
+            <input
+              type='text'
+              autoComplete='off'
+              id='username'
+              value={formData.username}
+              name='username'
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor='password'>Password:</label>
+            <input
+              type='password'
+              autoComplete='off'
+              id='password'
+              value={formData.password}
+              name='password'
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className={styles.actions}>
+            <button className={styles.submitBtn}>Sign In</button>
+            <button onClick={() => navigate('/')} className={styles.cancelBtn}>Cancel</button>
+          </div>
+        </form>
+      </div>
     </main>
   );
 };
