@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
-import { useParams , useNavigate } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import { UserContext } from '../../contexts/UserContext';
 import * as eventService from '../../services/eventService';
+import styles from './EventDetail.module.css';
 
 const EventDetail = () => {
     const { eventId } = useParams();
@@ -10,7 +11,7 @@ const EventDetail = () => {
     const [event, setEvent] = useState(null);
     const [isApplying, setIsApplying] = useState(false);
     const [validationMessage, setValidationMessage] = useState('');
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const isVolunteer = user.role === 'volunteer' ? true : false;
 
@@ -26,7 +27,7 @@ const EventDetail = () => {
 
     const isExpired = new Date(event.date) < new Date();
     const isFull = event.maxVolunteers === 0;
-    
+
     const handleApply = async () => {
         setValidationMessage('');
 
@@ -45,10 +46,10 @@ const EventDetail = () => {
         setIsApplying(false);
     };
 
- const handleDelete = async () => {
-     await eventService.deleteEvent(eventId);
-     navigate('/events');
-};
+    const handleDelete = async () => {
+        await eventService.deleteEvent(eventId);
+        navigate('/events');
+    };
 
 
     const handleUpdate = () => {
@@ -56,38 +57,36 @@ const EventDetail = () => {
     };
 
 
-    
+
     return (
-        <main>
-            <h1>{event.title}</h1>
-            <p>Description: {event.description}</p>
-            <p>Location: {event.location}</p>
-            <p>Date: {event.date}</p>
-            <p>Duration: {event.duration}</p>
-            <p>Max Volunteers: {event.maxVolunteers}</p>
+        <main className={styles.container}>
+            <h1 className={styles.title}>{event.title}</h1>
+            <p className={styles.info}><strong>Description:</strong> {event.description}</p>
+            <p className={styles.info}><strong>Location:</strong> {event.location}</p>
+            <p className={styles.info}><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</p>
+            <p className={styles.info}><strong>Duration:</strong> {event.duration} hours</p>
+            <p className={styles.info}><strong>Max Volunteers:</strong> {event.maxVolunteers}</p>
 
-            {isVolunteer &&
+            {validationMessage && <p className={styles.error}>{validationMessage}</p>}
 
-                <button
-                    onClick={handleApply}
-                    disabled={isApplying || isExpired || isFull}
-                >
-                    {
-                        isExpired ? 'Event Expired' :
-                            (isFull ? 'Applications Closed' :
-                                (isApplying ? 'Applying...' : 'Apply to Event'))
-                    }
+            <div className={styles.buttonGroup}>
+                {isVolunteer &&
+                    <button
+                        onClick={handleApply}
+                        disabled={isApplying || isExpired || isFull}
+                        className={styles.applyBtn}
+                    >
+                        {isExpired ? 'Event Expired' : (isFull ? 'Applications Closed' : (isApplying ? 'Applying...' : 'Apply to Event'))}
+                    </button>
+                }
 
-                </button>
-            }
-
-            {user.role === 'organization' && (
-                <>
-                    <button onClick={handleUpdate}>Update Event</button>
-                    <button onClick={handleDelete}>Delete Event</button>
-                </>
-            )}
-            {validationMessage && <p>{validationMessage}</p>}
+                {user.role === 'organization' && (
+                    <>
+                        <button onClick={handleUpdate} className={styles.updateBtn}>Update Event</button>
+                        <button onClick={handleDelete} className={styles.deleteBtn}>Delete Event</button>
+                    </>
+                )}
+            </div>
 
         </main>
     );
