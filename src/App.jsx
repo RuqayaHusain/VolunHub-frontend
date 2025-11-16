@@ -14,6 +14,8 @@ import EventList from './components/EventList/EventList';
 import EventForm from './components/EventForm/EventForm';
 import * as eventService from './services/eventService';
 import EventDetail from './components/EventDetail/EventDetail';
+import ProfileDetail from './components/ProfileDetail/ProfileDetail';
+
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -37,7 +39,7 @@ const App = () => {
             <Route path='/' element={<Dashboard/>}/>
             <Route path='/products' element={<h1>Producs</h1>}/>
             <Route path='/favs' element={<h1>Favs</h1>}/>
-            <Route path='/profile' element={<h1>{user.username}</h1>}/>
+            <Route path="/profile" element={<ProfileDetail />} />
             <Route path='/orders' element={<h1>ORDERS</h1>}/>
             <Route path='/events' element={<EventList />} />
             <Route path='/events/new' element={<EventForm handleAddEvent={handleAddEvent}/>} />
