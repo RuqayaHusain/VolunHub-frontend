@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import * as dashboardService from "../../services/dashboardService.js";
 import DashboardCard from './DashboardCard.jsx';
+import styles from './Dashboard.module.css';
 
 const VolunteerDashboard = () => {
   const { user } = useContext(UserContext);
@@ -17,14 +18,14 @@ const VolunteerDashboard = () => {
   }, [user]);
 
   return (
-    <main>
-      <h1>My Applications</h1>
+    <main className={styles.dashboardContainer}>
+      <h1 className={styles.dashboardTitle}>My Applications</h1>
 
 
       {applications.length === 0 ? (
-        <p>You haven’t applied to any events yet.</p>
+        <p className={styles.emptyMessage}>You haven't applied to any events yet.</p>
       ) : (
-        <div>
+        <div className={styles.cardContainer}>
           {applications.map((app) => (
             <DashboardCard key={app._id} application={app} />
           ))}

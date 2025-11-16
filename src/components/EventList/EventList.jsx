@@ -4,6 +4,7 @@ import * as eventService from '../../services/eventService';
 import EventFilter from "../EventFilter/EventFilter";
 import EventCard from "../EventCard/EventCard";
 import { UserContext } from "../../contexts/UserContext";
+import styles from './EventList.module.css';
 
 
 const EventList = () => {
@@ -33,13 +34,15 @@ const EventList = () => {
 
 
     return (
-        <main>
-            <h1>Events</h1>
-            {isOrganization && (
-                <button onClick={() => navigate('/events/new')}>
-                    Create Event
-                </button>
-            )}
+        <main className={styles.container}>
+            <div className={styles.header}>
+                <h1>Events</h1>
+                {isOrganization && (
+                    <button onClick={() => navigate('/events/new')} className={styles.createBtn}>
+                        Create Event
+                    </button>
+                )}
+            </div>
 
             <EventFilter
                 filter={filter}
@@ -48,10 +51,14 @@ const EventList = () => {
                 setValidationMessage={setValidationMessage}
             />
 
-            <section>
-                {events.map((event) => (
-                    <EventCard key={event._id} event={event} />
-                ))}
+            <section className={styles.eventSection}>
+                {events.length > 0 ? (
+                    events.map((event) =>
+                        <EventCard key={event._id} event={event} />)
+                ) : (
+                    <p className={styles.noEvents}>No events found.</p>
+                )
+                }
             </section>
 
         </main>

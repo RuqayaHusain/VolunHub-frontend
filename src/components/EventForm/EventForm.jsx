@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import * as eventService from '../../services/eventService';
+import styles from './EventForm.module.css';
 
 const EventForm = (props) => {
     const { eventId } = useParams();
@@ -64,100 +65,110 @@ const EventForm = (props) => {
     };
 
     return (
-        <main>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="title">Title</label>
-                <input
-                    required
-                    type="text"
-                    name="title"
-                    id="title"
-                    value={formData.title}
-                    onChange={handleChange}
-                />
+        <main className={styles.container}>
+            <div className={styles.card}>
+                <h1 className={styles.title}>{eventId ? 'Update Event' : 'Create Event'}</h1>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="title">Title</label>
+                        <input
+                            required
+                            type="text"
+                            name="title"
+                            id="title"
+                            value={formData.title}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="description">Description</label>
+                        <textarea
+                            required
+                            name="description"
+                            id="description"
+                            cols="10"
+                            rows="10"
+                            value={formData.description}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="category">Category</label>
+                        <select
+                            required
+                            name="category"
+                            id="category"
+                            value={formData.category}
+                            onChange={handleChange}>
 
-                <label htmlFor="description">Description</label>
-                <textarea
-                    required
-                    name="description"
-                    id="description"
-                    cols="10"
-                    rows="10"
-                    value={formData.description}
-                    onChange={handleChange}
-                />
+                            <option value="Community Service">Community Service</option>
+                            <option value="Education">Education</option>
+                            <option value="Environmental">Environmental</option>
+                            <option value="Health & Wellness">Health & Wellness</option>
+                            <option value="Animal Care">Animal Care</option>
+                            <option value="Arts & Culture">Arts & Culture</option>
+                            <option value="Sports & Recreation">Sports & Recreation</option>
+                            <option value="Human Rights">Human Rights</option>
+                            <option value="Disaster Relief">Disaster Relief</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Fundraising">Fundraising</option>
+                            <option value="Elderly Support">Elderly Support</option>
+                            <option value="Youth Empowerment">Youth Empowerment</option>
+                            <option value="Food Distribution">Food Distribution</option>
+                            <option value="Other">Other</option>
 
-                <label htmlFor="category">Category</label>
-                <select
-                    required
-                    name="category"
-                    id="category"
-                    value={formData.category}
-                    onChange={handleChange}>
-
-                    <option value="Community Service">Community Service</option>
-                    <option value="Education">Education</option>
-                    <option value="Environmental">Environmental</option>
-                    <option value="Health & Wellness">Health & Wellness</option>
-                    <option value="Animal Care">Animal Care</option>
-                    <option value="Arts & Culture">Arts & Culture</option>
-                    <option value="Sports & Recreation">Sports & Recreation</option>
-                    <option value="Human Rights">Human Rights</option>
-                    <option value="Disaster Relief">Disaster Relief</option>
-                    <option value="Technology">Technology</option>
-                    <option value="Fundraising">Fundraising</option>
-                    <option value="Elderly Support">Elderly Support</option>
-                    <option value="Youth Empowerment">Youth Empowerment</option>
-                    <option value="Food Distribution">Food Distribution</option>
-                    <option value="Other">Other</option>
-
-                </select>
-
-                <label htmlFor="location">Location</label>
-                <input
-                    required
-                    type="text"
-                    name="location"
-                    id="location"
-                    value={formData.location}
-                    onChange={handleChange}
-                />
-
-                <label htmlFor="date">Date</label>
-                <input
-                    required
-                    type="date"
-                    name="date"
-                    id="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                />
-                {validationMessage.date && <p>{validationMessage.date}</p>}
-
-                <label htmlFor="duration">Duration (hours)</label>
-                <input
-                    required
-                    type="number"
-                    name="duration"
-                    id="duration"
-                    value={formData.duration}
-                    onChange={handleChange}
-                />
-                {validationMessage.duration && <p>{validationMessage.duration}</p>}
-
-                <label htmlFor="maxVolunteers">Max Volunteers</label>
-                <input
-                    required
-                    type="number"
-                    name="maxVolunteers"
-                    id="maxVolunteers"
-                    value={formData.maxVolunteers}
-                    onChange={handleChange}
-                />
-                {validationMessage.maxVolunteers && <p>{validationMessage.maxVolunteers}</p>}
-
-                <button type="submit">{eventId ? 'Update Event' : 'Create Event'}</button>
-            </form>
+                        </select>
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="location">Location</label>
+                        <input
+                            required
+                            type="text"
+                            name="location"
+                            id="location"
+                            value={formData.location}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="date">Date</label>
+                        <input
+                            required
+                            type="date"
+                            name="date"
+                            id="date"
+                            value={formData.date}
+                            onChange={handleChange}
+                        />
+                        {validationMessage.date && <p className={styles.error}>{validationMessage.date}</p>}
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="duration">Duration (hours)</label>
+                        <input
+                            required
+                            type="number"
+                            name="duration"
+                            id="duration"
+                            value={formData.duration}
+                            onChange={handleChange}
+                        />
+                        {validationMessage.duration && <p className={styles.error}>{validationMessage.duration}</p>}
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="maxVolunteers">Max Volunteers</label>
+                        <input
+                            required
+                            type="number"
+                            name="maxVolunteers"
+                            id="maxVolunteers"
+                            value={formData.maxVolunteers}
+                            onChange={handleChange}
+                        />
+                        {validationMessage.maxVolunteers && <p className={styles.error}>{validationMessage.maxVolunteers}</p>}
+                    </div>
+                    <button type="submit" className={styles.submitBtn}>{eventId ? 'Update Event' : 'Create Event'}</button>
+                </form>
+            </div>
         </main>
     );
 

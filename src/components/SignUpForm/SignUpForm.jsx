@@ -1,6 +1,7 @@
 // Import the useContext hook
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
+import styles from './SignUpForm.module.css';
 
 import { signUp } from '../../services/authService';
 
@@ -67,11 +68,12 @@ const SignUpForm = () => {
   };
 
   return (
-    <main>
-      <h1>Sign Up</h1>
-      <p>{message}</p>
-      <form onSubmit={handleSubmit}>
-        <div>
+    <main className={styles.container}>
+      <div className={styles.card}>
+      <h1 className={styles.title}>Sign Up</h1>
+      <p className={styles.error}>{message}</p>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.inputGroup}>
           <label htmlFor='username'>Username:</label>
           <input
             type='text'
@@ -82,7 +84,7 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
+        <div className={styles.inputGroup}>
           <label htmlFor='name'>Full Name:</label>
           <input
             type='text'
@@ -93,7 +95,7 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
+        <div className={styles.inputGroup}>
           <label htmlFor='role'>Role:</label>
           <select
             id='role'
@@ -107,7 +109,7 @@ const SignUpForm = () => {
             <option value='organization'>Organization</option>
           </select>
         </div>
-        <div>
+        <div className={styles.inputGroup}>
           <label htmlFor='bio'>Bio:</label>
           <textarea
             id='bio'
@@ -116,7 +118,7 @@ const SignUpForm = () => {
             onChange={handleChange}
           ></textarea>
         </div>
-        <div>
+        <div className={styles.inputGroup}>
           <label htmlFor='profilePicture'>Profile Picture (URL):</label>
           <input
             type='text'
@@ -126,7 +128,7 @@ const SignUpForm = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className={styles.inputGroup}>
           <label htmlFor='password'>Password:</label>
           <input
             type='password'
@@ -137,7 +139,7 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
+        <div className={styles.inputGroup}>
           <label htmlFor='confirm'>Confirm Password:</label>
           <input
             type='password'
@@ -148,11 +150,12 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
-          <button disabled={isFormInvalid()}>Sign Up</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+        <div className={styles.actions}>
+          <button disabled={isFormInvalid()} className={styles.submitBtn}>Sign Up</button>
+          <button onClick={() => navigate('/')} className={styles.cancelBtn}>Cancel</button>
         </div>
       </form>
+      </div>
     </main>
   );
 };

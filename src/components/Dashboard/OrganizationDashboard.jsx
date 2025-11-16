@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { UserContext } from "../../contexts/UserContext";
 import * as dashboardService from "../../services/dashboardService.js";
 import OrganizationDashboardCard from "./OrganizationDashboardCard.jsx";
+import styles from './Dashboard.module.css';
 
 const OrganizationDashboard = () => {
   const { user } = useContext(UserContext);
@@ -42,33 +43,37 @@ const OrganizationDashboard = () => {
   });
 
   return (
-    <main>
-      <h1>Volunteers Applied to Your Events</h1>
+    <main className={styles.dashboardContainer}>
+      <h1 className={styles.dashboardTitle}>Volunteers Applied to Your Events</h1>
       {events.length === 0 ? (
-        <p>No events found.</p>
+        <p className={styles.emptyMessage}>No events found.</p>
       ) : (
-        <div>
-          <h2>Your Events</h2>
-          {events.map((ev) => {
-            const applicantsCount = applications.filter(
-              (app) => app.event?._id === ev._id
-            ).length;
-            return (
-              <div key={ev._id} onClick={() => navigate(`/events/${ev._id}`)}>
-                <h3>{ev.title}</h3>
-                <p>{new Date(ev.date).toLocaleDateString()}</p>
-                <p>Applicants: {applicantsCount}</p>
-              </div>
-            );
-          })}
-        </div>
+        <>
+          <h2 className={styles.dashboardSubTitle}>Your Events</h2>
+          <br />
+          <div className={styles.cardContainer}>
+            {events.map((ev) => {
+              const applicantsCount = applications.filter(
+                (app) => app.event?._id === ev._id
+              ).length;
+              return (
+                <div key={ev._id} onClick={() => navigate(`/events/${ev._id}`)} className={styles.eventCard}>
+                  <h3>{ev.title}</h3>
+                  <p>{new Date(ev.date).toLocaleDateString()}</p>
+                  <p>Applicants: {applicantsCount}</p>
+                </div>
+              );
+            })}
+          </div>
+        </>
       )}
-      <hr />
-      <h2>Applications (all)</h2>
+      <br />
+      <h2 className={styles.dashboardSubTitle}>All Applications</h2>
+      <br />
       {applications.length === 0 ? (
-        <p>No volunteers have applied to your events yet.</p>
+        <p className={styles.emptyMessage}>No volunteers have applied to your events yet.</p>
       ) : (
-        <div>
+        <div className={styles.cardContainer}>
           {applications.map((app) => (
             <OrganizationDashboardCard
               key={app._id}

@@ -1,0 +1,63 @@
+.container {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+}
+
+.card {
+  background: white;
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 1.2rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--gray-medium);
+  line-height: 1.7;
+  margin-bottom: 2.2rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.signUpBtn {
+  background: var(--primary);
+  padding: 0.9rem 1.8rem;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.signUpBtn:hover {
+  background: var(--primary-dark);
+}
+
+.signInBtn {
+  padding: 0.9rem 1.8rem;
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  color: var(--primary-dark);
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.signInBtn:hover {
+  background: var(--primary-light);
+}
