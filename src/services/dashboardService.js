@@ -76,7 +76,7 @@
 export const updateApplicationStatus = async (applicationId, status) => {
   try {
     const res = await fetch(`${import.meta.env.VITE_BACK_END_SERVER_URL}/applications/${applicationId}/status`, {
-      method: "PATCH",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,

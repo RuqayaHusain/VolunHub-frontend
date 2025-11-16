@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams , useNavigate } from 'react-router';
 import { UserContext } from '../../contexts/UserContext';
 import * as eventService from '../../services/eventService';
 
@@ -10,6 +10,7 @@ const EventDetail = () => {
     const [event, setEvent] = useState(null);
     const [isApplying, setIsApplying] = useState(false);
     const [validationMessage, setValidationMessage] = useState('');
+    const navigate = useNavigate(); 
 
     const isVolunteer = user.role === 'volunteer' ? true : false;
 
@@ -44,7 +45,21 @@ const EventDetail = () => {
         setIsApplying(false);
     };
 
+ const handleDelete = async () => {
+    try {
+        await eventService.deleteEvent(eventId);
+        navigate('/events');
+    } catch (err) {
+    }
+};
 
+
+    const handleUpdate = () => {
+        navigate(`/events/edit/${eventId}`);
+    };
+
+
+    
     return (
         <main>
             <h1>{event.title}</h1>
@@ -67,9 +82,14 @@ const EventDetail = () => {
                     }
 
                 </button>
-
             }
 
+            {user.role === 'organization' && (
+                <>
+                    <button onClick={handleUpdate}>Update Event</button>
+                    <button onClick={handleDelete}>Delete Event</button>
+                </>
+            )}
             {validationMessage && <p>{validationMessage}</p>}
 
         </main>

@@ -63,10 +63,56 @@ const applyForEvent = async (eventId) => {
 };
 
 
+ const deleteEvent = async (eventId) => {
+  try {
+    const res = await fetch(
+      `${import.meta.env.VITE_BACK_END_SERVER_URL}/events/${eventId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(text || res.statusText);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Error deleting event:", error);
+    throw error;
+  }
+};
+
+const updateEvent = async (eventId, updatedData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${eventId}`, {
+      method: 'PUT', // <-- use PUT here
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedData),
+    });
+    return res.json();
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+
+
+
 
 export {
     createEvent,
     showAllEvents,
     showEvent,
     applyForEvent,
+    updateEvent ,
+    deleteEvent
+    
 }

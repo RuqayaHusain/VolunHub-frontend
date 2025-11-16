@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import * as dashboardService from "../../services/dashboardService.js";
@@ -34,7 +35,7 @@ const VolunteerDashboard = () => {
       ) : (
         <div>
           {uniqueEvents.map((app) => (
-            <DashboardCard key={app._id} application={app} />
+            <DashboardCard key={app._id} applications={app} />
           ))}
         </div>
       )}
@@ -44,3 +45,4 @@ const VolunteerDashboard = () => {
 
 
 export default VolunteerDashboard;
+
