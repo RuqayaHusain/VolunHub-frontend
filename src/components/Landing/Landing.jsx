@@ -1,4 +1,5 @@
 // src/components/Landing.jsx
+import { Link } from 'react-router';
 import styles from './Landing.module.css';
 
 const Landing = () => {
@@ -11,8 +12,8 @@ const Landing = () => {
         </p>
 
         <div className={styles.actions}>
-          <a href="/sign-up" className={styles.signUpBtn}>Get Started</a>
-          <a href="/sign-in" className={styles.signInBtn}>Sign In</a>
+          <Link to='/sign-up' className={styles.signUpBtn}>Get Started</Link>
+          <Link to='/sign-in' className={styles.signInBtn}>Sign In</Link>
         </div>
       </div>
     </main>
