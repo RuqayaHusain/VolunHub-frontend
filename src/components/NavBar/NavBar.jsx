@@ -3,6 +3,7 @@
 // Import the useContext hook
 import { useContext } from 'react';
 import { Link } from 'react-router';
+import styles from './NavBar.module.css';
 
 // Import the UserContext object
 import { UserContext } from '../../contexts/UserContext';
@@ -24,16 +25,19 @@ const NavBar = () => {
   };
 
   return (
-    <nav>
+    <nav className={styles.navbar}>
+      <div className={styles.logo}>
+        <Link to='/'>Volunteer Hub</Link>
+      </div>
       {user ? (
-        <ul>
-          <li>Welcome, {user.username}</li>
+        <ul className={styles.navLinks}>
+          <li  className={styles.title}>Welcome, {user.username}</li>
           <li><Link to='/'>Dashboard</Link></li>
           <li><Link to='/events'>Events</Link></li>
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
         </ul>
       ) : (
-        <ul>
+        <ul className={styles.navLinks}>
           <li><Link to='/'>Home</Link></li>
           <li><Link to='/sign-up'>Sign Up</Link></li>
           <li><Link to='/sign-in'>Sign In</Link></li>

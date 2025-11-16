@@ -1,0 +1,38 @@
+:root {
+  --primary: #2E7D32;
+  --primary-light: #A5D6A7;
+  --primary-dark: #1B5E20;
+
+  --accent-yellow: #FFEB3B;
+  --accent-orange: #FF9800;
+  --accent-coral: #F76C5E;
+
+  --gray-dark: #333333;
+  --gray-medium: #757575;
+  --gray-light: #E0E0E0;
+
+  --background: #FAFAFA;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html, body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #FAFAFA;
+  color: #333333;
+  height: 100%;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
