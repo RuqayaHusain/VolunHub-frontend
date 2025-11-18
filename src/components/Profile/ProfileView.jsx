@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router";
+import { Save } from "lucide-react";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('token');
@@ -92,14 +95,14 @@ const ProfileView = ({ userId, isOwnProfile = false }) => {
             </div>
 
        
-            {isOwnProfile && (
-              <button
-                onClick={() => window.location.href = '/profile/edit'}
+          {isOwnProfile && (
+            <Link 
+                to="/profile/edit"
                 className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                <Edit2 size={18} />
-                Edit Profile
-              </button>
+            >
+            <Edit2 size={18} />
+            Edit Profile
+             </Link>
             )}
           </div>
 
