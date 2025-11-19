@@ -14,7 +14,7 @@ import EventDetail from './components/EventDetail/EventDetail';
 import OrganizationDashboard from "./components/Dashboard/OrganizationDashboard.jsx";
 import ProfileView from './components/Profile/ProfileView';
 import ProfileEditForm from './components/Profile/ProfileEditForm';
-import ReviewsPage from './components/Review/ReviewForm';
+import ReviewForm from './components/Review/ReviewForm';
 
 
 
@@ -61,7 +61,7 @@ const App = () => {
           <Route path='/profile' element={<ProfileView isOwnProfile={true} />} />
           <Route path='/profile/edit' element={<ProfileEditForm />} />
           <Route path='/profile/:userId' element={<ProfileView isOwnProfile={false} />} />
-          <Route path='/events/:eventId/reviews' element={<ReviewsPage />} />
+          <Route path='/events/:eventId/reviews' element={<ReviewForm />} />
 
             
           </>

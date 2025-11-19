@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import * as eventService from '../../services/eventService';
 import styles from './EventDetail.module.css';
+import ReviewForm from '../Review/ReviewForm';
 
 const EventDetail = () => {
     const { eventId } = useParams();
@@ -57,8 +59,7 @@ const EventDetail = () => {
     };
 
 
-
-    return (
+ return (
         <main className={styles.container}>
             <h1 className={styles.title}>{event.title}</h1>
             <p className={styles.info}><strong>Description:</strong> {event.description}</p>
@@ -87,7 +88,9 @@ const EventDetail = () => {
                     </>
                 )}
             </div>
-
+                 <div className={styles.reviewsSection} style={{ marginTop: '50px' }}>
+                <ReviewForm eventId={eventId} />
+            </div>
         </main>
     );
 
