@@ -89,7 +89,15 @@ const EventDetail = () => {
                 )}
             </div>
                  <div className={styles.reviewsSection} style={{ marginTop: '50px' }}>
-                <ReviewForm eventId={eventId} />
+                        {isVolunteer && (
+                         <Link
+                             to={`/events/${eventId}/write-review`}
+                             className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                         >
+                             Write a Review
+                                    </Link>
+                                )}
+
             </div>
         </main>
     );
