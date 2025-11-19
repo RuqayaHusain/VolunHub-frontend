@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { X, Save } from "lucide-react";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = 'http://localhost:3000';
 
 
 const getAuthHeaders = () => {
@@ -130,7 +130,6 @@ const ProfileEditForm = () => {
         )}
 
         <div className="space-y-6">
-          {/* Profile Picture Section */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Profile Picture
@@ -155,7 +154,6 @@ const ProfileEditForm = () => {
             </div>
           </div>
 
-          {/* Name Field */}
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
               Full Name *
@@ -172,7 +170,6 @@ const ProfileEditForm = () => {
             />
           </div>
 
-          {/* Bio Field */}
           <div>
             <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-2">
               Bio
@@ -191,7 +188,6 @@ const ProfileEditForm = () => {
             </p>
           </div>
 
-          {/* Action Buttons */}
           <div className="flex gap-4 pt-4">
             <button
               onClick={handleSubmit}

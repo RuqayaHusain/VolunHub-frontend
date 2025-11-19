@@ -63,7 +63,6 @@ const App = () => {
           <Route path='/profile/:userId' element={<ProfileView isOwnProfile={false} />} />
           <Route path='/events/:eventId/reviews' element={<ReviewsPage />} />
 
-
             
           </>
           

@@ -36,7 +36,6 @@ const NavBar = () => {
           <li><Link to='/events'>Events</Link></li>
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
           <li><Link to="/profile">My Profile</Link></li>
-          <li><Link to="/profile/edit">Edit Profile</Link></li>
         </ul>
       ) : (
         <ul className={styles.navLinks}>
