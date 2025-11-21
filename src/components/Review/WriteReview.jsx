@@ -121,7 +121,8 @@ const WriteReview = () => {
 
   if (!isVolunteer) {
     return (
-      <div className="write-review-container">
+      <div className={styles.writeReviewContainer}
+>
         <div className="warning-alert">
           <AlertCircle className="error-alert-icon" size={20} />
           <div>
@@ -134,7 +135,8 @@ const WriteReview = () => {
   }
 
   return (
-    <div className="write-review-container">
+    <div className={styles.writeReviewContainer}
+>
       {/* Write Review Section */}
       <div className="review-form-card">
         <h2 className="review-title">Write a Review</h2>
