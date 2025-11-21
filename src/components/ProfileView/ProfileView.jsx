@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from "react-router-dom";
 import { Edit2, Clock } from "lucide-react";
 import styles from './ProfileView.module.css';
+import * as userService from '../../services/userService';
 
-const API_BASE_URL = 'http://localhost:3000';
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('token');

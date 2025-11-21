@@ -20,3 +20,37 @@ export const index = async () => {
     throw new Error(err);
   }
 }
+
+const getUserById = async (userId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const updateProfile = async (profileData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/profile`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(profileData),
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+export {
+  getCurrentUser,
+  getUserById,
+  updateProfile,
+};

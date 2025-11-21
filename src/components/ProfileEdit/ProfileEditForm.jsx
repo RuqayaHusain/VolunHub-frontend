@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { X, Save } from "lucide-react";
 import styles from './ProfileEditForm.module.css';
+import * as userService from '../../services/userService';
 
-const API_BASE_URL = 'http://localhost:3000';
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('token');

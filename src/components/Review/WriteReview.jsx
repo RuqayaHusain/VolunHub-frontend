@@ -4,7 +4,7 @@ import { Star, Send, AlertCircle } from 'lucide-react';
 import { UserContext } from '../../contexts/UserContext';
 import styles from "./WriteReview.module.css";
 
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 const MAX_CHARACTERS = 500;
 
 const getAuthHeaders = () => {
@@ -28,11 +28,10 @@ const WriteReview = () => {
   const isVolunteer = user?.role === 'volunteer';
   const isOrganization = user?.role === 'organization';
 
-  // =======================
-  // CHANGE 1: تحديد من يمكنه الكتابة والمشاهدة
+ 
   const canWrite = isVolunteer;                
   const canView = isVolunteer || isOrganization; 
-  // =======================
+  
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -122,9 +121,6 @@ const WriteReview = () => {
   return (
     <div className={styles.writeReviewContainer}>
 
-      {/* =======================
-          CHANGE 2: Form الكتابة يظهر فقط للمتطوع
-      ======================= */}
       {canWrite && (
         <div className={styles.reviewFormCard}>
           <h2 className={styles.reviewTitle}>Write a Review</h2>        
@@ -180,9 +176,7 @@ const WriteReview = () => {
         </div>
       )}
 
-      {/* =======================
-          CHANGE 3: قائمة المراجعات تظهر للمتطوع والمنظمة
-      ======================= */}
+       
       {canView ? (
         <div className={styles.reviewsListCard}>
           <div className={styles.reviewsHeader}>
@@ -246,8 +240,7 @@ const WriteReview = () => {
         )}
         </div>
       ) : (
-        // =======================
-        // CHANGE 4: أي مستخدم آخر يشوف رسالة Access Restricted
+       
         <div className={styles.warningAlert}>
           <AlertCircle size={20} />
           <div>
