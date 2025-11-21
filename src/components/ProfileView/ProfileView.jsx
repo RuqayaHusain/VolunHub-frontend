@@ -59,14 +59,14 @@ const ProfileView = ({ userId, isOwnProfile = false }) => {
   };
 
   if (loading) return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+    <div className={styles.loadingContainer}>
+      <div className={styles.loadingSpinner}></div>
     </div>
   );
 
   if (error) return (
-    <div className="max-w-2xl mx-auto p-6">
-      <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+    <div className={styles.errorContainer}>
+      <div className={styles.errorAlert}>
         <strong>Profile load error:</strong> {error}
       </div>
     </div>
