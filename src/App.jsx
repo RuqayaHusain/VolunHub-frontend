@@ -12,8 +12,8 @@ import EventForm from './components/EventForm/EventForm';
 import * as eventService from './services/eventService';
 import EventDetail from './components/EventDetail/EventDetail';
 import OrganizationDashboard from "./components/Dashboard/OrganizationDashboard.jsx";
-import ProfileView from './components/Profile/ProfileView';
-import ProfileEditForm from './components/Profile/ProfileEditForm';
+import ProfileView from './components/ProfileView/ProfileView.jsx';
+import ProfileEditForm from './components/ProfileEdit/ProfileEditForm.jsx';
 import WriteReview from './components/Review/WriteReview';
 
 
