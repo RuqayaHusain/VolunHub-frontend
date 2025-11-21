@@ -75,12 +75,12 @@ const ProfileView = ({ userId, isOwnProfile = false }) => {
   if (!profile) return null;
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-        <div className="bg-gradient-to-r from-blue-500 to-purple-600 h-32"></div>
-        <div className="relative px-6 pb-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-end gap-4 -mt-16">
-            <div className="relative">
+   <div className={styles.container}>
+      <div className={styles.card}>
+        <div className={styles.coverBanner}></div>
+        <div className={styles.profileSection}>
+          <div className={styles.profileHeader}>
+            <div className={styles.avatarWrapper}>
               <img
                 src={profile.profilePicture || `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.name)}&size=128&background=random`}
                 alt={profile.name}
