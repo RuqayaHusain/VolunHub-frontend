@@ -148,15 +148,36 @@ const WriteReview = () => {
         </div>
         )}
 
-        <div className="rating-section">
-          <label className="rating-label">Your Rating</label>
-          <div className="rating-container">
-            {renderStars(newReview.rating, true, 40)}
-            <span className="rating-text">
-              {ratingLabels[hoverRating || newReview.rating]}
-            </span>
-          </div>
-        </div>
+           <div className={styles.ratingSection}>
+                    <label className={styles.ratingLabel}>Your Rating</label>
+
+                    <div className={styles.ratingContainer}>
+                        <div className={styles.starsWrapper}>
+                            {[1, 2, 3, 4, 5].map((value) => (
+                                <button
+                                    key={value}
+                                    type="button"
+                                    className={styles.starButton}
+                                    onClick={() => handleRatingClick(value)}
+                                    onMouseEnter={() => handleHover(value)}
+                                    onMouseLeave={handleHoverLeave}
+                                >
+                                    <Star
+                                        className={`${styles.starIcon} ${
+                                            (hoverRating || rating) >= value
+                                                ? styles.starFilled
+                                                : styles.starEmpty
+                                        }`}
+                                    />
+                                </button>
+                            ))}
+                        </div>
+
+                        <span className={styles.ratingText}>
+                            {rating > 0 ? `${rating} / 5` : "Select a rating"}
+                        </span>
+                    </div>
+                </div>
 
         <div className="comment-section">
           <label className="comment-label">Share Your Experience</label>
