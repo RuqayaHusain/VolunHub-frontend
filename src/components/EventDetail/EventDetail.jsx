@@ -1,10 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
-import { Link } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import * as eventService from '../../services/eventService';
 import styles from './EventDetail.module.css';
-import ReviewForm from '../Review/WriteReview';
 
 const EventDetail = () => {
     const { eventId } = useParams();
@@ -59,7 +57,8 @@ const EventDetail = () => {
     };
 
 
- return (
+
+    return (
         <main className={styles.container}>
             <h1 className={styles.title}>{event.title}</h1>
             <p className={styles.info}><strong>Description:</strong> {event.description}</p>
@@ -87,26 +86,6 @@ const EventDetail = () => {
                         <button onClick={handleDelete} className={styles.deleteBtn}>Delete Event</button>
                     </>
                 )}
-            </div>
-                 <div className={styles.reviewsSection} style={{ marginTop: '50px' }}>
-                        {isVolunteer && (
-                         <Link
-                             to={`/events/${eventId}/write-review`}
-                             className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                         >
-                             Write a Review
-                                    </Link>
-                                )}
-
-                         {user.role === 'organization' && (
-                             <Link
-                              to={`/reviews/${eventId}`} // This should point to your WriteReview component page
-                             className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 ml-4"
-                            >
-                            View Reviews
-                        </Link>
-                        )}
-
             </div>
 
         </main>
