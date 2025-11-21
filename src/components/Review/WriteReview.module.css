@@ -203,3 +203,42 @@
     transform: rotate(360deg);
   }
 }
+
+.reviewsListCard {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 10px 20px rgba(0, 0, 0, 0.05);
+  padding: 2.5rem;
+}
+
+.reviewsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.reviewsListTitle {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #1a202c;
+}
+
+.reviewsSummary {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.averageRating {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.reviewCount {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
