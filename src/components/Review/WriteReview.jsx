@@ -179,19 +179,19 @@ const WriteReview = () => {
                     </div>
                 </div>
 
-        <div className="comment-section">
-          <label className="comment-label">Share Your Experience</label>
-          <textarea
-            rows={6}
-            value={newReview.comment}
-            onChange={e => setNewReview(prev => ({ ...prev, comment: e.target.value }))}
-            className="comment-textarea"
-            placeholder="Tell us about your experience with this event. What did you enjoy? What could be improved?"
-          />
-          <p className="character-count">
-            {newReview.comment.length} characters
-          </p>
-        </div>
+         <div className={styles.commentSection}>
+                    <label className={styles.commentLabel}>Your Review</label>
+                    <textarea
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        className={styles.commentTextarea}
+                        maxLength={MAX_CHARACTERS}
+                        placeholder="Share your experience…"
+                    />
+                    <div className={styles.characterCount}>
+                        {comment.length}/{MAX_CHARACTERS}
+                    </div>
+                </div>
 
         {/* Submit Button */}
         <button
