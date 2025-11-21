@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { X, Save } from "lucide-react";
+import styles from './ProfileEdit.module.css';
 
 const API_BASE_URL = 'http://localhost:3000';
-
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('token');
@@ -98,64 +98,62 @@ const ProfileEditForm = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div className={styles.loadingContainer}>
+        <div className={styles.loadingSpinner}></div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <div className="bg-white rounded-xl shadow-lg p-8">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">Edit Profile</h1>
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Edit Profile</h1>
           <button
             onClick={() => window.history.back()}
-            className="text-gray-600 hover:text-gray-900"
+            className={styles.closeButton}
           >
             <X size={24} />
           </button>
         </div>
 
         {error && (
-          <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+          <div className={`${styles.alert} ${styles.alertError}`}>
             {error}
           </div>
         )}
 
         {success && (
-          <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
+          <div className={`${styles.alert} ${styles.alertSuccess}`}>
             Profile updated successfully! Redirecting...
           </div>
         )}
 
-        <div className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Profile Picture
-            </label>
-            <div className="flex items-center gap-6">
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.fieldGroup}>
+            <label className={styles.label}>Profile Picture</label>
+            <div className={styles.profilePictureSection}>
               <img
                 src={imagePreview || `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.name || 'User')}&size=128&background=random`}
                 alt="Profile preview"
-                className="w-24 h-24 rounded-full object-cover border-2 border-gray-200"
+                className={styles.profileImage}
               />
-              <div className="flex-1">
+              <div className={styles.imageInputWrapper}>
                 <input
                   type="url"
                   name="profilePicture"
                   value={profile.profilePicture}
                   onChange={handleImageChange}
                   placeholder="Enter image URL"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={styles.input}
                 />
-                <p className="mt-2 text-sm text-gray-500">Enter a URL to your profile picture</p>
+                <p className={styles.hint}>Enter a URL to your profile picture</p>
               </div>
             </div>
           </div>
 
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+          <div className={styles.fieldGroup}>
+            <label htmlFor="name" className={styles.label}>
               Full Name *
             </label>
             <input
@@ -165,13 +163,13 @@ const ProfileEditForm = () => {
               value={profile.name}
               onChange={handleInputChange}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={styles.input}
               placeholder="Enter your full name"
             />
           </div>
 
-          <div>
-            <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-2">
+          <div className={styles.fieldGroup}>
+            <label htmlFor="bio" className={styles.label}>
               Bio
             </label>
             <textarea
@@ -180,23 +178,23 @@ const ProfileEditForm = () => {
               value={profile.bio}
               onChange={handleInputChange}
               rows={5}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+              className={styles.textarea}
               placeholder="Tell us about yourself..."
             />
-            <p className="mt-2 text-sm text-gray-500">
+            <p className={styles.charCount}>
               {profile.bio.length} characters
             </p>
           </div>
 
-          <div className="flex gap-4 pt-4">
+          <div className={styles.buttonGroup}>
             <button
-              onClick={handleSubmit}
+              type="submit"
               disabled={saving}
-              className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className={styles.saveButton}
             >
               {saving ? (
                 <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                  <div className={styles.spinner}></div>
                   Saving...
                 </>
               ) : (
@@ -207,13 +205,14 @@ const ProfileEditForm = () => {
               )}
             </button>
             <button
+              type="button"
               onClick={() => window.history.back()}
-              className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+              className={styles.cancelButton}
             >
               Cancel
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
