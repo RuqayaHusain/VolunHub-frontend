@@ -98,7 +98,17 @@ const EventDetail = () => {
                                     </Link>
                                 )}
 
+                         {user.role === 'organization' && (
+                             <Link
+                              to={`/reviews/${eventId}`} // This should point to your WriteReview component page
+                             className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 ml-4"
+                            >
+                            View Reviews
+                        </Link>
+                        )}
+
             </div>
+
         </main>
     );
 

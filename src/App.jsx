@@ -61,6 +61,8 @@ const App = () => {
           <Route path='/profile/edit' element={<ProfileEditForm />} />
           <Route path='/profile/:userId' element={<ProfileView isOwnProfile={false} />} />
           <Route path="/events/:eventId/write-review" element={<WriteReview />} />
+          <Route path="/reviews/:eventId" element={<WriteReview />} />
+
             
           </>
           

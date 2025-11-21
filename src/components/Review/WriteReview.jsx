@@ -28,10 +28,11 @@ const WriteReview = () => {
   const isVolunteer = user?.role === 'volunteer';
   const isOrganization = user?.role === 'organization';
 
+  // =======================
+  // CHANGE 1: تحديد من يمكنه الكتابة والمشاهدة
   const canWrite = isVolunteer;                
   const canView = isVolunteer || isOrganization; 
-
-
+  // =======================
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -118,86 +119,70 @@ const WriteReview = () => {
     ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
     : 0;
 
-  
-   return (
-  <div className={styles.writeReviewContainer}>
-    {canWrite && (
-      <div className={styles.reviewFormCard}>
-      </div>
-    )}
-
-    {canView ? (
-      <div className={styles.reviewsListCard}>
-      </div>
-    ) : (
-      <div className={styles.warningAlert}>
-        <AlertCircle size={20} />
-        <div>
-          <p className={styles.warningAlertTitle}>Access Restricted</p>
-          <p className={styles.warningAlertText}>You don’t have permission to view reviews.</p>
-        </div>
-      </div>
-    )}
-  </div>
-);
-  
-
   return (
     <div className={styles.writeReviewContainer}>
-      <div className={styles.reviewFormCard}>
-        <h2 className={styles.reviewTitle}>Write a Review</h2>        
-        
-        {error && (
-          <div className={styles.errorAlert}>
-            <span className={styles.errorAlertIcon}>⚠️</span>
-            {error}
-          </div>
-        )}
 
-        <div className={styles.ratingSection}>
-          <label className={styles.ratingLabel}>Your Rating</label>
-          <div className={styles.ratingContainer}>
-            {renderStars(newReview.rating, true, 32)}
-            <span className={styles.ratingText}>
-              {newReview.rating > 0 ? `${newReview.rating} / 5` : "Select a rating"}
-            </span>
-          </div>
-        </div>
-
-        <div className={styles.commentSection}>
-          <label className={styles.commentLabel}>Your Review</label>
-          <textarea
-            value={newReview.comment}
-            onChange={(e) => setNewReview(prev => ({ ...prev, comment: e.target.value }))}
-            className={styles.commentTextarea}
-            rows={6}
-            maxLength={MAX_CHARACTERS}
-            placeholder="Share your experience…"
-          />
-          <div className={styles.characterCount}>
-            {newReview.comment.length}/{MAX_CHARACTERS}
-          </div>
-        </div>
-
-        <button
-          onClick={handleSubmit}
-          disabled={submitting || !newReview.comment.trim()}
-          className={styles.submitButton}
-        >
-          {submitting ? (
-            <>
-              <div className={styles.buttonSpinner}></div>
-              Submitting...
-            </>
-          ) : (
-            <>
-              <Send size={20} />
-              Submit Review
-            </>
+      {/* =======================
+          CHANGE 2: Form الكتابة يظهر فقط للمتطوع
+      ======================= */}
+      {canWrite && (
+        <div className={styles.reviewFormCard}>
+          <h2 className={styles.reviewTitle}>Write a Review</h2>        
+          {error && (
+            <div className={styles.errorAlert}>
+              <span className={styles.errorAlertIcon}>⚠️</span>
+              {error}
+            </div>
           )}
-        </button>
-      </div>
 
+          <div className={styles.ratingSection}>
+            <label className={styles.ratingLabel}>Your Rating</label>
+            <div className={styles.ratingContainer}>
+              {renderStars(newReview.rating, true, 32)}
+              <span className={styles.ratingText}>
+                {newReview.rating > 0 ? `${newReview.rating} / 5` : "Select a rating"}
+              </span>
+            </div>
+          </div>
+
+          <div className={styles.commentSection}>
+            <label className={styles.commentLabel}>Your Review</label>
+            <textarea
+              value={newReview.comment}
+              onChange={(e) => setNewReview(prev => ({ ...prev, comment: e.target.value }))}
+              className={styles.commentTextarea}
+              rows={6}
+              maxLength={MAX_CHARACTERS}
+              placeholder="Share your experience…"
+            />
+            <div className={styles.characterCount}>
+              {newReview.comment.length}/{MAX_CHARACTERS}
+            </div>
+          </div>
+
+          <button
+            onClick={handleSubmit}
+            disabled={submitting || !newReview.comment.trim()}
+            className={styles.submitButton}
+          >
+            {submitting ? (
+              <>
+                <div className={styles.buttonSpinner}></div>
+                Submitting...
+              </>
+            ) : (
+              <>
+                <Send size={20} />
+                Submit Review
+              </>
+            )}
+          </button>
+        </div>
+      )}
+
+      {/* =======================
+          CHANGE 3: قائمة المراجعات تظهر للمتطوع والمنظمة
+      ======================= */}
       {canView ? (
         <div className={styles.reviewsListCard}>
           <div className={styles.reviewsHeader}>
@@ -258,12 +243,11 @@ const WriteReview = () => {
               </div>
             ))}
           </div>
-       
-
         )}
-      </div>
-       ) : (
-
+        </div>
+      ) : (
+        // =======================
+        // CHANGE 4: أي مستخدم آخر يشوف رسالة Access Restricted
         <div className={styles.warningAlert}>
           <AlertCircle size={20} />
           <div>
@@ -272,7 +256,7 @@ const WriteReview = () => {
           </div>
         </div>
       )}
-    </div>
+
     </div>
   );
 };
