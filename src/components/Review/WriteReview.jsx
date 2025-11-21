@@ -193,15 +193,14 @@ const WriteReview = () => {
                     </div>
                 </div>
 
-        {/* Submit Button */}
         <button
           onClick={handleSubmit}
           disabled={submitting || !newReview.comment.trim()}
-          className="submit-button"
+          className={styles.submitButton}
         >
           {submitting ? (
             <>
-              <div className="button-spinner"></div>
+              <div className={styles.buttonSpinner}></div>
               Submitting...
             </>
           ) : (
@@ -213,15 +212,14 @@ const WriteReview = () => {
         </button>
       </div>
 
-      {/* Reviews List Section */}
-      <div className="reviews-list-card">
-        <div className="reviews-header">
-          <h3 className="reviews-list-title">All Reviews</h3>
+      <div className={styles.reviewsLisCard}>
+        <div className={styles.reviewsHeader}>
+          <h3 className={reviewsListTitle}>All Reviews</h3>
           {reviews.length > 0 && (
-            <div className="reviews-summary">
+            <div className={styles.reviewsSummary}>
               {renderStars(Math.round(averageRating), false, 20)}
-              <span className="average-rating">{averageRating}</span>
-              <span className="review-count">
+              <span className={styles.averageRating}>{averageRating}</span>
+              <span className={styles.reviewCount}>
                 ({reviews.length} {reviews.length === 1 ? 'review' : 'reviews'})
               </span>
             </div>
