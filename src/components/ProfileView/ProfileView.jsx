@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from "react-router-dom";
 import { Edit2, Clock } from "lucide-react";
+import styles from './ProfileView.module.css';
 
 const API_BASE_URL = 'http://localhost:3000';
-
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('token');
@@ -12,8 +12,6 @@ const getAuthHeaders = () => {
     'Authorization': `Bearer ${token}`
   };
 };
-
-
 
 const ProfileView = ({ userId, isOwnProfile = false }) => {
   const [profile, setProfile] = useState(null);
@@ -75,7 +73,7 @@ const ProfileView = ({ userId, isOwnProfile = false }) => {
   if (!profile) return null;
 
   return (
-   <div className={styles.container}>
+    <div className={styles.container}>
       <div className={styles.card}>
         <div className={styles.coverBanner}></div>
         <div className={styles.profileSection}>
@@ -86,9 +84,7 @@ const ProfileView = ({ userId, isOwnProfile = false }) => {
                 alt={profile.name}
                 className={styles.avatar}
               />
-              < div className={`${styles.statusBadge} ${styles[profile.role]}`}></div>
-              
-              </div>
+              <div className={`${styles.statusBadge} ${styles[profile.role]}`}></div>
             </div>
 
             <div className={styles.profileInfo}>
@@ -98,19 +94,19 @@ const ProfileView = ({ userId, isOwnProfile = false }) => {
                   {profile.role.charAt(0).toUpperCase() + profile.role.slice(1)}
                 </span>
               </div>
-                 <p className={styles.username}>@{profile.username}</p>            </div>
+              <p className={styles.username}>@{profile.username}</p>
+            </div>
 
             {isOwnProfile && (
-              <Link 
-                to="/profile/edit"
-                className={styles.editButton}              >
+              <Link to="/profile/edit" className={styles.editButton}>
                 <Edit2 size={18} />
                 Edit Profile
               </Link>
             )}
           </div>
+
           {profile.role === 'volunteer' && (
-          <div className={styles.statsGrid}>
+            <div className={styles.statsGrid}>
               <div className={styles.statCard}>
                 <div className={styles.statContent}>
                   <Clock className={styles.statIcon} size={24} />
@@ -123,7 +119,7 @@ const ProfileView = ({ userId, isOwnProfile = false }) => {
             </div>
           )}
 
-           {profile.bio && (
+          {profile.bio && (
             <div className={styles.bioSection}>
               <h2 className={styles.bioTitle}>About</h2>
               <p className={styles.bioText}>{profile.bio}</p>
