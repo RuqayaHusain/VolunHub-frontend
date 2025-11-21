@@ -226,34 +226,34 @@ const WriteReview = () => {
           )}
         </div>
 
-        {reviews.length === 0 ? (
-          <div className="empty-state">
-            <Star size={48} className="empty-state-icon" />
-            <p className="empty-state-text">No reviews yet</p>
-            <p className="empty-state-subtext">
+         {reviews.length === 0 ? (
+          <div className={styles.emptyState}>
+            <Star size={48} className={styles.emptyStateIcon} />
+            <p className={styles.emptyStateText}>No reviews yet</p>
+            <p className={styles.emptyStateSubtext}>
               Be the first to share your experience!
             </p>
           </div>
         ) : (
           <div>
             {reviews.map((review) => (
-              <div key={review._id} className="review-item">
-                <div className="review-content">
+              <div key={review._id} className={styles.reviewItem}>
+                <div className={styles.reviewContent}>
                   <img
                     src={review.user?.profilePicture || `https://ui-avatars.com/api/?name=${encodeURIComponent(review.user?.name || 'User')}&size=48&background=random`}
                     alt={review.user?.name}
-                    className="review-avatar"
+                    className={styles.reviewAvatar}
                   />
                   
-                  <div className="review-details">
-                    <div className="review-header">
-                      <div className="review-user-info">
-                        <h4 className="review-username">
+                  <div className={styles.reviewDetails}>
+                    <div className={styles.reviewHeader}>
+                      <div className={styles.reviewUserInfo}>
+                        <h4 className={styles.reviewUsername}>
                           {review.user?.name}
                         </h4>
-                        <div className="review-meta">
+                        <div className={styles.reviewMeta}>
                           {renderStars(review.rating, false, 18)}
-                          <span className="review-date">
+                          <span className={styles.reviewDate}>
                             {new Date(review.createdAt).toLocaleDateString('en-US', {
                               year: 'numeric',
                               month: 'long',
@@ -263,7 +263,7 @@ const WriteReview = () => {
                         </div>
                       </div>
                     </div>
-                    <p className="review-comment">
+                    <p className={styles.reviewComment}>
                       {review.comment}
                     </p>
                   </div>
