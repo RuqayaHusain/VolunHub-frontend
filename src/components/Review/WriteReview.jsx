@@ -5,6 +5,7 @@ import { UserContext } from '../../contexts/UserContext';
 import styles from "./WriteReview.module.css";
 
 const API_BASE_URL = 'http://localhost:3000';
+const MAX_CHARACTERS = 500;
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('token');
@@ -80,7 +81,7 @@ const WriteReview = () => {
 
   const renderStars = (rating, interactive = false, size = 24) => {
     return (
-      <div className="stars-wrapper">
+      <div className={styles.starsWrapper}>
         {[1, 2, 3, 4, 5].map((star) => {
           const isFilled = interactive 
             ? star <= (hoverRating || rating)
@@ -94,11 +95,11 @@ const WriteReview = () => {
               onMouseEnter={() => interactive && setHoverRating(star)}
               onMouseLeave={() => interactive && setHoverRating(0)}
               disabled={!interactive}
-              className="star-button"
+              className={styles.starButton}
             >
               <Star
                 size={size}
-                className={`star-icon ${isFilled ? 'star-filled' : 'star-empty'}`}
+                className={`${styles.starIcon} ${isFilled ? styles.starFilled : styles.starEmpty}`}
               />
             </button>
           );
@@ -107,27 +108,18 @@ const WriteReview = () => {
     );
   };
 
-  const ratingLabels = {
-    1: 'Poor',
-    2: 'Fair',
-    3: 'Good',
-    4: 'Very Good',
-    5: 'Excellent'
-  };
-
   const averageRating = reviews.length > 0
     ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
     : 0;
 
   if (!isVolunteer) {
     return (
-      <div className={styles.writeReviewContainer}
->
-        <div className="warning-alert">
-          <AlertCircle className="error-alert-icon" size={20} />
+      <div className={styles.writeReviewContainer}>
+        <div className={styles.warningAlert}>
+          <AlertCircle size={20} />
           <div>
-            <p className="warning-alert-title">Access Restricted</p>
-            <p className="warning-alert-text">Only volunteers can write reviews for events.</p>
+            <p className={styles.warningAlertTitle}>Access Restricted</p>
+            <p className={styles.warningAlertText}>Only volunteers can write reviews for events.</p>
           </div>
         </div>
       </div>
@@ -135,63 +127,41 @@ const WriteReview = () => {
   }
 
   return (
-    <div className={styles.writeReviewContainer}
->
-      <div className={styles.reviewFormCard}
-
->
-    <h2 className={styles.reviewTitle}>Write a Review </h2>        
+    <div className={styles.writeReviewContainer}>
+      <div className={styles.reviewFormCard}>
+        <h2 className={styles.reviewTitle}>Write a Review</h2>        
+        
         {error && (
-        <div className={styles.errorAlert}>
-        <span className={styles.errorAlertIcon}>⚠️</span>
-        {error}
-        </div>
+          <div className={styles.errorAlert}>
+            <span className={styles.errorAlertIcon}>⚠️</span>
+            {error}
+          </div>
         )}
 
-           <div className={styles.ratingSection}>
-                    <label className={styles.ratingLabel}>Your Rating</label>
+        <div className={styles.ratingSection}>
+          <label className={styles.ratingLabel}>Your Rating</label>
+          <div className={styles.ratingContainer}>
+            {renderStars(newReview.rating, true, 32)}
+            <span className={styles.ratingText}>
+              {newReview.rating > 0 ? `${newReview.rating} / 5` : "Select a rating"}
+            </span>
+          </div>
+        </div>
 
-                    <div className={styles.ratingContainer}>
-                        <div className={styles.starsWrapper}>
-                            {[1, 2, 3, 4, 5].map((value) => (
-                                <button
-                                    key={value}
-                                    type="button"
-                                    className={styles.starButton}
-                                    onClick={() => handleRatingClick(value)}
-                                    onMouseEnter={() => handleHover(value)}
-                                    onMouseLeave={handleHoverLeave}
-                                >
-                                    <Star
-                                        className={`${styles.starIcon} ${
-                                            (hoverRating || rating) >= value
-                                                ? styles.starFilled
-                                                : styles.starEmpty
-                                        }`}
-                                    />
-                                </button>
-                            ))}
-                        </div>
-
-                        <span className={styles.ratingText}>
-                            {rating > 0 ? `${rating} / 5` : "Select a rating"}
-                        </span>
-                    </div>
-                </div>
-
-         <div className={styles.commentSection}>
-                    <label className={styles.commentLabel}>Your Review</label>
-                    <textarea
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                        className={styles.commentTextarea}
-                        maxLength={MAX_CHARACTERS}
-                        placeholder="Share your experience…"
-                    />
-                    <div className={styles.characterCount}>
-                        {comment.length}/{MAX_CHARACTERS}
-                    </div>
-                </div>
+        <div className={styles.commentSection}>
+          <label className={styles.commentLabel}>Your Review</label>
+          <textarea
+            value={newReview.comment}
+            onChange={(e) => setNewReview(prev => ({ ...prev, comment: e.target.value }))}
+            className={styles.commentTextarea}
+            rows={6}
+            maxLength={MAX_CHARACTERS}
+            placeholder="Share your experience…"
+          />
+          <div className={styles.characterCount}>
+            {newReview.comment.length}/{MAX_CHARACTERS}
+          </div>
+        </div>
 
         <button
           onClick={handleSubmit}
@@ -212,9 +182,9 @@ const WriteReview = () => {
         </button>
       </div>
 
-      <div className={styles.reviewsLisCard}>
+      <div className={styles.reviewsListCard}>
         <div className={styles.reviewsHeader}>
-          <h3 className={reviewsListTitle}>All Reviews</h3>
+          <h3 className={styles.reviewsListTitle}>All Reviews</h3>
           {reviews.length > 0 && (
             <div className={styles.reviewsSummary}>
               {renderStars(Math.round(averageRating), false, 20)}
@@ -226,7 +196,7 @@ const WriteReview = () => {
           )}
         </div>
 
-         {reviews.length === 0 ? (
+        {reviews.length === 0 ? (
           <div className={styles.emptyState}>
             <Star size={48} className={styles.emptyStateIcon} />
             <p className={styles.emptyStateText}>No reviews yet</p>
