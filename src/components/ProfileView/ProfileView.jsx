@@ -84,56 +84,49 @@ const ProfileView = ({ userId, isOwnProfile = false }) => {
               <img
                 src={profile.profilePicture || `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.name)}&size=128&background=random`}
                 alt={profile.name}
-                className="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
+                className={styles.avatar}
               />
-              <div className={`absolute bottom-2 right-2 w-4 h-4 rounded-full border-2 border-white ${
-                profile.role === 'volunteer' ? 'bg-green-500' : 'bg-blue-500'
-              }`}></div>
+              < div className={`${styles.statusBadge} ${styles[profile.role]}`}></div>
+              
+              </div>
             </div>
 
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
-                <h1 className="text-3xl font-bold text-gray-900">{profile.name}</h1>
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  profile.role === 'volunteer' 
-                    ? 'bg-green-100 text-green-800' 
-                    : 'bg-blue-100 text-blue-800'
-                }`}>
+            <div className={styles.profileInfo}>
+              <div className={styles.profileNameRow}>
+                <h1 className={styles.profileName}>{profile.name}</h1>
+                <span className={`${styles.roleBadge} ${styles[profile.role]}`}>
                   {profile.role.charAt(0).toUpperCase() + profile.role.slice(1)}
                 </span>
               </div>
-              <p className="text-gray-600">@{profile.username}</p>
-            </div>
+                 <p className={styles.username}>@{profile.username}</p>            </div>
 
             {isOwnProfile && (
               <Link 
                 to="/profile/edit"
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-              >
+                className={styles.editButton}              >
                 <Edit2 size={18} />
                 Edit Profile
               </Link>
             )}
           </div>
-
           {profile.role === 'volunteer' && (
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg">
-                <div className="flex items-center gap-3">
-                  <Clock className="text-blue-600" size={24} />
+          <div className={styles.statsGrid}>
+              <div className={styles.statCard}>
+                <div className={styles.statContent}>
+                  <Clock className={styles.statIcon} size={24} />
                   <div>
-                    <p className="text-sm text-gray-600">Total Hours</p>
-                    <p className="text-2xl font-bold text-gray-900">{profile.totalHours || 0}</p>
+                    <p className={styles.statLabel}>Total Hours</p>
+                    <p className={styles.statValue}>{profile.totalHours || 0}</p>
                   </div>
                 </div>
               </div>
             </div>
           )}
 
-          {profile.bio && (
-            <div className="mt-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-3">About</h2>
-              <p className="text-gray-700 leading-relaxed">{profile.bio}</p>
+           {profile.bio && (
+            <div className={styles.bioSection}>
+              <h2 className={styles.bioTitle}>About</h2>
+              <p className={styles.bioText}>{profile.bio}</p>
             </div>
           )}
         </div>
