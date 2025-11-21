@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Star, Send, AlertCircle } from 'lucide-react';
 import { UserContext } from '../../contexts/UserContext';
-import './Review.css';
+import styles from "./WriteReview.module.css";
 
 const API_BASE_URL = 'http://localhost:3000';
 
