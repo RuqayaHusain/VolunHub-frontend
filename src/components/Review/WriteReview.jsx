@@ -138,7 +138,9 @@ const WriteReview = () => {
     <div className={styles.writeReviewContainer}
 >
       {/* Write Review Section */}
-      <div className="review-form-card">
+      <div className={styles.reviewFormCard}
+
+>
         <h2 className="review-title">Write a Review</h2>
         
         {error && (
