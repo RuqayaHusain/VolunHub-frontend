@@ -388,3 +388,34 @@
     height: 32px;
   }
 }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reviewItem {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Accessibility Focus */
+.starButton:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.commentTextarea:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.submitButton:focus-visible {
+  outline: 2px solid #1e40af;
+  outline-offset: 2px;
+}
