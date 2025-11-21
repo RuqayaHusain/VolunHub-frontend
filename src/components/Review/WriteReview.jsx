@@ -118,19 +118,29 @@ const WriteReview = () => {
     ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
     : 0;
 
-  if (!isVolunteer) {
-    return (
-      <div className={styles.writeReviewContainer}>
-        <div className={styles.warningAlert}>
-          <AlertCircle size={20} />
-          <div>
-            <p className={styles.warningAlertTitle}>Access Restricted</p>
-            <p className={styles.warningAlertText}>Only volunteers can write reviews for events.</p>
-          </div>
+  
+   return (
+  <div className={styles.writeReviewContainer}>
+    {canWrite && (
+      <div className={styles.reviewFormCard}>
+      </div>
+    )}
+
+    {canView ? (
+      <div className={styles.reviewsListCard}>
+      </div>
+    ) : (
+      <div className={styles.warningAlert}>
+        <AlertCircle size={20} />
+        <div>
+          <p className={styles.warningAlertTitle}>Access Restricted</p>
+          <p className={styles.warningAlertText}>You don’t have permission to view reviews.</p>
         </div>
       </div>
-    );
-  }
+    )}
+  </div>
+);
+  
 
   return (
     <div className={styles.writeReviewContainer}>
@@ -188,19 +198,20 @@ const WriteReview = () => {
         </button>
       </div>
 
-      <div className={styles.reviewsListCard}>
-        <div className={styles.reviewsHeader}>
-          <h3 className={styles.reviewsListTitle}>All Reviews</h3>
-          {reviews.length > 0 && (
-            <div className={styles.reviewsSummary}>
-              {renderStars(Math.round(averageRating), false, 20)}
-              <span className={styles.averageRating}>{averageRating}</span>
-              <span className={styles.reviewCount}>
-                ({reviews.length} {reviews.length === 1 ? 'review' : 'reviews'})
-              </span>
-            </div>
-          )}
-        </div>
+      {canView ? (
+        <div className={styles.reviewsListCard}>
+          <div className={styles.reviewsHeader}>
+            <h3 className={styles.reviewsListTitle}>All Reviews</h3>
+            {reviews.length > 0 && (
+              <div className={styles.reviewsSummary}>
+                {renderStars(Math.round(averageRating), false, 20)}
+                <span className={styles.averageRating}>{averageRating}</span>
+                <span className={styles.reviewCount}>
+                  ({reviews.length} {reviews.length === 1 ? 'review' : 'reviews'})
+                </span>
+              </div>
+            )}
+          </div>
 
         {reviews.length === 0 ? (
           <div className={styles.emptyState}>
@@ -247,8 +258,21 @@ const WriteReview = () => {
               </div>
             ))}
           </div>
+       
+
         )}
       </div>
+       ) : (
+
+        <div className={styles.warningAlert}>
+          <AlertCircle size={20} />
+          <div>
+            <p className={styles.warningAlertTitle}>Access Restricted</p>
+            <p className={styles.warningAlertText}>You don’t have permission to view reviews.</p>
+          </div>
+        </div>
+      )}
+    </div>
     </div>
   );
 };
