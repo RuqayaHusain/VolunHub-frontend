@@ -26,6 +26,12 @@ const WriteReview = () => {
   const [hoverRating, setHoverRating] = useState(0);
 
   const isVolunteer = user?.role === 'volunteer';
+  const isOrganization = user?.role === 'organization';
+
+  const canWrite = isVolunteer;                
+  const canView = isVolunteer || isOrganization; 
+
+
 
   useEffect(() => {
     const fetchReviews = async () => {
