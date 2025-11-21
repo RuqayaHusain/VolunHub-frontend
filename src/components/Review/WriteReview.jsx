@@ -137,20 +137,17 @@ const WriteReview = () => {
   return (
     <div className={styles.writeReviewContainer}
 >
-      {/* Write Review Section */}
       <div className={styles.reviewFormCard}
 
 >
-        <h2 className="review-title">Write a Review</h2>
-        
+    <h2 className={styles.reviewTitle}>Write a Review </h2>        
         {error && (
-          <div className="error-alert">
-            <AlertCircle className="error-alert-icon" size={20} />
-            <p>{error}</p>
-          </div>
+        <div className={styles.errorAlert}>
+        <span className={styles.errorAlertIcon}>⚠️</span>
+        {error}
+        </div>
         )}
 
-        {/* Rating Section */}
         <div className="rating-section">
           <label className="rating-label">Your Rating</label>
           <div className="rating-container">
@@ -161,7 +158,6 @@ const WriteReview = () => {
           </div>
         </div>
 
-        {/* Comment Section */}
         <div className="comment-section">
           <label className="comment-label">Share Your Experience</label>
           <textarea
