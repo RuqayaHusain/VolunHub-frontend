@@ -242,3 +242,94 @@
   font-size: 0.875rem;
   color: #6b7280;
 }
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.emptyStateIcon {
+  color: #d1d5db;
+  margin: 0 auto 1rem;
+}
+
+.emptyStateText {
+  font-size: 1.125rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.emptyStateSubtext {
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+/* Review Item */
+.reviewItem {
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.reviewItem:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.reviewContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.reviewAvatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.reviewDetails {
+  flex: 1;
+}
+
+.reviewHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.reviewUserInfo {
+  flex: 1;
+}
+
+.reviewUsername {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+}
+
+.reviewMeta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.reviewDate {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.reviewComment {
+  color: #374151;
+  line-height: 1.6;
+  font-size: 1rem;
+}
