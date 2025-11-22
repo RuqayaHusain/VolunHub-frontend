@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from "react-routerc";
+import { Link } from "react-router";
 import { Edit2, Clock } from "lucide-react";
 import styles from './ProfileView.module.css';
 import * as userService from '../../services/userService';
