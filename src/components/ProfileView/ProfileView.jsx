@@ -1,17 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Edit2, Clock } from "lucide-react";
 import styles from './ProfileView.module.css';
 import * as userService from '../../services/userService';
-
-
-const getAuthHeaders = () => {
-  const token = localStorage.getItem('token');
-  return {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
-  };
-};
 
 const ProfileView = ({ userId, isOwnProfile = false }) => {
   const [profile, setProfile] = useState(null);
@@ -28,25 +19,10 @@ const ProfileView = ({ userId, isOwnProfile = false }) => {
       setLoading(true);
       setError(null);
 
-      const endpoint = isOwnProfile 
-        ? `${API_BASE_URL}/users/current-user`
-        : `${API_BASE_URL}/users/${userId}`;
+      const data = isOwnProfile 
+        ? await userService.getCurrentUser()
+        : await userService.getUserById(userId);
 
-      console.log('Fetching profile from:', endpoint);
-
-      const response = await fetch(endpoint, { headers: getAuthHeaders() });
-
-      const contentType = response.headers.get('content-type');
-      if (!response.ok) {
-        const text = await response.text();
-        throw new Error(`Server error: ${response.status} - ${text}`);
-      }
-      if (!contentType || !contentType.includes('application/json')) {
-        const text = await response.text();
-        throw new Error(`Expected JSON but got HTML or other content. URL may be wrong or backend not running. Response preview: ${text.slice(0, 200)}...`);
-      }
-
-      const data = await response.json();
       setProfile(data);
     } catch (err) {
       console.error('Profile fetch error:', err);
