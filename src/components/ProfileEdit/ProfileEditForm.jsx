@@ -3,15 +3,6 @@ import { X, Save } from "lucide-react";
 import styles from './ProfileEditForm.module.css';
 import * as userService from '../../services/userService';
 
-
-const getAuthHeaders = () => {
-  const token = localStorage.getItem('token');
-  return {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
-  };
-};
-
 const ProfileEditForm = () => {
   const [profile, setProfile] = useState({
     name: '',
@@ -30,12 +21,7 @@ const ProfileEditForm = () => {
 
   const fetchCurrentProfile = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/users/current-user`, {
-        headers: getAuthHeaders()
-      });
-      
-      if (!response.ok) throw new Error('Failed to fetch profile');
-      const data = await response.json();
+      const data = await userService.getCurrentUser();
       setProfile({
         name: data.name || '',
         bio: data.bio || '',
@@ -74,16 +60,7 @@ const ProfileEditForm = () => {
       setSaving(true);
       setError(null);
       
-      const response = await fetch(`${API_BASE_URL}/users/profile`, {
-        method: 'PUT',
-        headers: getAuthHeaders(),
-        body: JSON.stringify(profile)
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to update profile');
-      }
+      await userService.updateProfile(profile);
 
       setSuccess(true);
       setTimeout(() => {
