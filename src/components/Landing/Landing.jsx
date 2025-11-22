@@ -1,4 +1,3 @@
-// src/components/Landing.jsx
 import { Link } from 'react-router';
 import styles from './Landing.module.css';
 
