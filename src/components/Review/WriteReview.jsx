@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { Star, Send, AlertCircle } from 'lucide-react';
 import { UserContext } from '../../contexts/UserContext';
 import styles from "./WriteReview.module.css";
