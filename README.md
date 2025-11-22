@@ -15,13 +15,15 @@ This repository contains the **front-end** portion of the MERN stack project —
 
 ## 🖼️ Screenshot / Logo
 
+<img width="3006" height="1454" alt="image" src="https://github.com/user-attachments/assets/edc905eb-da6c-4768-bbf7-426451963897" />
+
 
 ---
 
 ## 🚀 Getting Started
 
 ### 🔗 Live Demo & Links
-- **Frontend Deployment:** [Frontend Deployment Link]
+- **Frontend Deployment:** [Frontend Deployment Link](https://volun-hub-frontend.vercel.app/)
 - **Backend Repository:** [Backend Repo Link](https://github.com/RuqayaHusain/VolunHub-backend)
 - **Planning Docs (Trello / ERD / Wireframes):** [Planning Materials Link](https://trello.com/b/stIO635N/volunhub)
 
