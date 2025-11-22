@@ -48,29 +48,33 @@ const WriteReview = () => {
     try {
       setSubmitting(true);
       setError(null);
-      const res = await fetch(`${API_BASE_URL}/reviews`, {
-        method: 'POST',
-        headers: getAuthHeaders(),
-        body: JSON.stringify({
-          ...newReview,
-          event: eventId,
-        }),
-      });
-      
-      await reviewService.createReview({
+      const handleSubmit = async () => {
+  if (!newReview.comment.trim()) {
+    setError('Please write a comment');
+    return;
+  }
+
+  try {
+    setSubmitting(true);
+    setError(null);
+    
+    await reviewService.createReview({
       ...newReview,
       event: eventId,
-      });
+    });
 
-const updatedReviews = await reviewService.getReviewsByEvent(eventId);
-      setReviews(updatedReviews);
-      setNewReview({ rating: 5, comment: '' });
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setSubmitting(false);
-    }
-  };
+    const updatedReviews = await reviewService.getReviewsByEvent(eventId);
+    setReviews(updatedReviews);
+    setNewReview({ rating: 5, comment: '' });
+  } catch (err) {
+    setError(err.message);
+  } finally {
+    setSubmitting(false);
+  }
+};
+      
+     
+
 
   const renderStars = (rating, interactive = false, size = 24) => {
     return (
