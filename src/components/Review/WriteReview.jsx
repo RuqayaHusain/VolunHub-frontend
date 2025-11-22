@@ -3,17 +3,11 @@ import { useParams } from 'react-router';
 import { Star, Send, AlertCircle } from 'lucide-react';
 import { UserContext } from '../../contexts/UserContext';
 import styles from "./WriteReview.module.css";
+import * as reviewService from '../../services/reviewService';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 const MAX_CHARACTERS = 500;
 
-const getAuthHeaders = () => {
-  const token = localStorage.getItem('token');
-  return {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`,
-  };
-};
+
 
 const WriteReview = () => {
   const { eventId } = useParams();
@@ -36,11 +30,7 @@ const WriteReview = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/reviews/event/${eventId}`, {
-          headers: getAuthHeaders(),
-        });
-        if (!res.ok) throw new Error('Failed to fetch reviews');
-        const data = await res.json();
+       const data = await reviewService.getReviewsByEvent(eventId);
         setReviews(data);
       } catch (err) {
         setError(err.message);
@@ -67,15 +57,12 @@ const WriteReview = () => {
         }),
       });
       
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.message || 'Failed to submit review');
-      }
-      
-      const updatedRes = await fetch(`${API_BASE_URL}/reviews/event/${eventId}`, {
-        headers: getAuthHeaders(),
+      await reviewService.createReview({
+      ...newReview,
+      event: eventId,
       });
-      const updatedReviews = await updatedRes.json();
+
+const updatedReviews = await reviewService.getReviewsByEvent(eventId);
       setReviews(updatedReviews);
       setNewReview({ rating: 5, comment: '' });
     } catch (err) {
