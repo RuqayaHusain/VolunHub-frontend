@@ -45,12 +45,7 @@ const WriteReview = () => {
       return;
     }
 
-   const handleSubmit = async () => {
-  if (!newReview.comment.trim()) {
-    setError('Please write a comment');
-    return;
-  }
-
+   
   try {
     setSubmitting(true);
     setError(null);
@@ -237,6 +232,8 @@ const WriteReview = () => {
 
     </div>
   );
+
 };
+
 
 export default WriteReview;

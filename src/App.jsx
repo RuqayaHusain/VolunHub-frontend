@@ -56,12 +56,12 @@ const App = () => {
           <Route path='/events' element={<EventList />} />
           <Route path='/events/new' element={<EventForm handleAddEvent={handleAddEvent} />} />
           <Route path='/events/edit/:eventId'element={<EventForm handleUpdateEvent={handleUpdateEvent} />}/>
+          <Route path="/events/:eventId/write-review" element={<WriteReview />} />
           <Route path='/events/:eventId' element={<EventDetail />} />
+          <Route path="/reviews/:eventId" element={<WriteReview />} />
           <Route path='/profile' element={<ProfileView isOwnProfile={true} />} />
           <Route path='/profile/edit' element={<ProfileEditForm />} />
           <Route path='/profile/:userId' element={<ProfileView isOwnProfile={false} />} />
-          <Route path="/events/:eventId/write-review" element={<WriteReview />} />
-          <Route path="/reviews/:eventId" element={<WriteReview />} />
 
             
           </>
@@ -76,5 +76,6 @@ const App = () => {
     </>
   );
 }
+
 
 export default App;
